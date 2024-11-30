@@ -64,6 +64,9 @@
 }
 
 /* ======================= dashboard content syles =========================== */
+.content{
+   overflow-y: auto;
+}
 
 /* banner */
 .banner{

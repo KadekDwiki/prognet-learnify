@@ -25,8 +25,8 @@
 </head>
 
 <body>
-   <div class="container-fluid vw-100 min-vh-100 d-flex px-0">
-      <div class="sidebar col-2 py-4 ps-4 pe-3 d-flex flex-column justify-content-between">
+   <div class="container-fluid vw-100 vh-100 d-flex px-0">
+      <div class="sidebar vh-100 sticky-top top-0 py-4 ps-4 pe-3 d-flex flex-column justify-content-between">
          <div class="wrapper">
             <div class="side-brand d-flex justify-content-center mb-5">
                <img src="{{ asset("images/logo.png") }}" class="w-50 text-center" alt="">
@@ -44,7 +44,7 @@
                <button class="w-full d-block btn btn-primary py-2 w-100 rounded-5" data-bs-toggle="modal" data-bs-target="#logoutModal">Logout</button>
          </div>
       </div>
-      <div class="content bg-body-tertiary col-10 d-flex flex-column pt-4 px-4">
+      <div class="content bg-body-tertiary col-10 d-flex flex-column py-4 px-4">
          @yield('content')
       </div>
    </div>
