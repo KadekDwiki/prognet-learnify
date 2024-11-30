@@ -1,0 +1,79 @@
+.footer-wave{
+   bottom: -50px;
+}
+
+.wrapper{
+   /* height: 400px; */
+   width: 500px;
+}
+
+.rectangle-wrapper{
+   z-index: -3;
+   top: 300px;
+   width: 800px;
+   height: 350px;
+}
+
+.rectangle{
+   background: linear-gradient(to right, #187AD5, #1368B8);
+   border-radius: 10px;
+   animation: bounce 3s linear infinite;
+}
+
+.rectangle-1{
+   width: 40px;
+   height: 40px;
+   top: 0;
+   left: 130px;
+}
+
+.rectangle-2{
+   width: 60px;
+   height: 60px;
+   bottom: 30px;
+   left: 10px;
+   animation-delay: 0.6s;
+}
+
+.rectangle-3{
+   width: 60px;
+   height: 60px;
+   bottom: 0;
+   right: 0;
+   animation-delay: -0.9s;
+}
+
+.dotted-design{
+   background-image: url("/public/images/dotted.svg");
+   background-size: contain;
+   background-repeat: no-repeat;
+   width: 100px;
+   height: 400px;
+}
+
+.dotted-design-1{
+   top: 10px;
+   left: 0;
+}
+
+.dotted-design-2{
+   top: 150px;
+   right: 0;
+   transform: rotate(-20deg);
+}
+
+/* styles form custom register form */
+
+
+/* keyframes animation for element decoration */
+@keyframes bounce {
+   0%{
+      transform: translateY(0px);
+   }
+   50%{
+      transform: translateY(15px);
+   }
+   100%{
+      transform: translateY(0px);
+   }
+}
