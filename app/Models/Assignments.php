@@ -9,4 +9,11 @@ class Assignments extends Model
 {
     /** @use HasFactory<\Database\Factories\AssignmentsFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'title',
+        'description',
+        'due_date',
+        'class_id'
+    ];
 }
