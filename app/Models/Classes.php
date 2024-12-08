@@ -9,4 +9,10 @@ class Classes extends Model
 {
     /** @use HasFactory<\Database\Factories\ClassesFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'description',
+        'teacher_id'
+    ];
 }

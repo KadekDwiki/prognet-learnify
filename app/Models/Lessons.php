@@ -9,4 +9,11 @@ class Lessons extends Model
 {
     /** @use HasFactory<\Database\Factories\LessonsFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'title',
+        'content',
+        'file_url',
+        'class_id'
+    ];
 }
