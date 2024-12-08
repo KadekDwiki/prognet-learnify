@@ -4,9 +4,9 @@
         <img src="{{ asset('images/class-card-math.png') }}" alt="">
     </div>
     <div class="description d-flex gap-2 flex-column w-100">
-        <span class="btn btn-primary btn-sm rounded-pill px-3" style="width: fit-content">
+        <a href="/lessons/{{ $classId }}" class="btn btn-primary btn-sm rounded-pill px-3" style="width: fit-content">
             {{ $name }}
-        </span>
+        </a>
         <h6 class="break-word">{{ $teacher }}</h6>
         <small class="fw-normal">Task {{ $task }} | Progress {{ $progress }}%</small>
         <div class="progress w-100" role="progressbar" aria-label="Basic example" aria-valuenow="{{ $progress }}" aria-valuemin="0" aria-valuemax="100">
