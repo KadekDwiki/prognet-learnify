@@ -81,3 +81,31 @@
    display: grid;
    grid-template-columns: repeat(2, minmax(0, 1fr));
 }
+
+.header-classes {
+   left: -10px;
+}
+
+.nav-link{
+   transition: .2s ease-in;
+   position: relative;
+   margin-right: 50px;
+}
+
+.nav-link a{
+   color: #656565;
+}
+
+.nav-link:hover a{
+   color: #1368B8 !important;
+}
+
+/* active side link style */
+.nav-link.active a{
+   color: #1368B8 !important;
+}
+
+.content-classes{
+   margin-top: 100px;
+}
+

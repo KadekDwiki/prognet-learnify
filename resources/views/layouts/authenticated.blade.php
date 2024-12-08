@@ -44,7 +44,7 @@
                <button class="w-full d-block btn btn-primary py-2 w-100 rounded-5" data-bs-toggle="modal" data-bs-target="#logoutModal">Logout</button>
          </div>
       </div>
-      <div class="content bg-body-tertiary col-10 d-flex flex-column py-4 px-4">
+      <div class="content position-relative bg-body-tertiary col-10 d-flex flex-column py-4 px-4">
          @yield('content')
       </div>
    </div>

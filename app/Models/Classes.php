@@ -15,4 +15,9 @@ class Classes extends Model
         'description',
         'teacher_id'
     ];
+
+    public function lessons()
+    {
+        return $this->hasMany(Lessons::class, 'class_id');
+    }
 }

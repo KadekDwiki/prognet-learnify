@@ -6,7 +6,7 @@
             Beranda</a>
     </div>
     <div class="side-link p-2 ps-3 rounded-end-2 {{ Request::is('kelas*') ? 'active' : ''}}">
-        <a href="{{ route('dashboard') }}" class="text-decoration-none d-flex align-items-center text-dark">
+        <a href="{{ route('classes') }}" class="text-decoration-none d-flex align-items-center text-dark">
             <x-icon class="me-3" name="solar:notebook-bookmark-broken" width="28" height="28" />
             Kelas</a>
     </div>

@@ -19,36 +19,38 @@
       <div class="recap-cards d-flex gap-3">
          <div class="recap-card w-100 d-flex flex-column p-3 bg-my-light-blue rounded-3 shadow-sm">
             <p class="text-light-emphasis">Tugas dalam Progress</p>
-            <h4 class=" h1 fw-bold text-primary">80</h4>
+            <h4 class=" h1 fw-bold text-primary">{{ $pendingAssignments }}</h4>
          </div>
          <div class="recap-card w-100 d-flex flex-column p-3 bg-my-light-blue rounded-3 shadow-sm">
             <p class="text-light-emphasis">Tugas Selesai</p>
-            <h4 class=" h1 fw-bold text-primary">20</h4>
+            <h4 class=" h1 fw-bold text-primary">{{ $completedAssignments }}</h4>
          </div>
          <div class="recap-card w-100 d-flex flex-column p-3 bg-my-light-blue rounded-3 shadow-sm">
             <p class="text-light-emphasis">Kelas</p>
-            <h4 class=" h1 fw-bold text-primary">3</h4>
+            <h4 class=" h1 fw-bold text-primary">{{ $classCount }}</h4>
          </div>
       </div>
    </div>
    <div class="classes">
       <div class="d-flex justify-content-between">
          <h5 class="text-primary mb-3">Kelasmu</h5>
-         <a href="#" class="link-offset-2">Lihat Semua</a>
+         <a href="{{ route('classes') }}" class="link-offset-2">Lihat Semua</a>
       </div>
-      <div class="class-cards gap-3">
-         <x-card-class name="Matematika - A" teacher="I Kadek Dwiki Nusanjaya" task="10" progress="20" />
-         <x-card-class name="Biologi - B" teacher="I Kadek Dwiki Nusanjaya" task="1" progress="100" />
-         <x-card-class name="Kimia - D" teacher="I Kadek Dwiki Nusanjaya" task="3" progress="70" />
-         <x-card-class name="Pemrograman Internet - D" teacher="I Kadek Dwiki Nusanjaya" task="5" progress="30" />
-      </div>
+      
+      @if(count($classes) > 0)
+         <div class="class-cards gap-3">
+            @foreach ($classes as $class)
+               <x-card-class :classId="$class->class_id" :name="$class->class_name" :teacher="$class->teacher_name" task="10" progress="20" />
+            @endforeach
+         </div>
+      @else
+         <div class="empty-classes">
+            <div class="d-flex justify-content-center align-items-center flex-column">
+               <img src="{{ asset('images/rainy-face.png') }}" alt="">
+               <p>Yahh, kamu belom ada kelas</p>
+               <a href="" class="btn btn-primary rounded-pill px-4">Gabung Kelas</a>
+            </div>
+         </div>
+      @endif
    </div>
-
-   {{-- <div class="empty-classes">
-      <div class="d-flex justify-content-center align-items-center flex-column">
-         <img src="{{ asset('images/rainy-face.png') }}" alt="">
-         <p>Yahh, kamu belom ada kelas</p>
-         <a href="" class="btn btn-primary rounded-pill px-4">Gabung Kelas</a>
-      </div>
-   </div> --}}
 @endsection

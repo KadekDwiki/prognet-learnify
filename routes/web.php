@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Classes;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ClassesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -28,4 +30,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::get('/classes', [ClassesController::class, 'index'])->name('classes');
+    Route::get('/lessons/{id}', [ClassesController::class, 'show'])->name('classes.lessons');
 });

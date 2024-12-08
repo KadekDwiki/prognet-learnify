@@ -16,4 +16,9 @@ class Lessons extends Model
         'file_url',
         'class_id'
     ];
+
+    public function class()
+    {
+        return $this->belongsTo(Classes::class, 'class_id');
+    }
 }
