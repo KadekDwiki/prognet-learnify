@@ -11,12 +11,12 @@
             Kelas</a>
     </div>
     <div class="side-link p-2 ps-3 rounded-end-2 {{ Request::is('kelas*') ? 'active' : ''}}">
-        <a href="{{ route('dashboard') }}" class="text-decoration-none d-flex align-items-center text-dark">
-            <x-icon class="me-3" name="solar:bell-broken" width="28" height="28" />
-            Pengingat</a>
+    <a href="{{ route('classes') }}" class="text-decoration-none d-flex align-items-center text-dark">
+        <x-icon class="me-3" name="solar:bell-broken" width="28" height="28" />
+        Pengingat</a>
     </div>
-    <div class="side-link p-2 ps-3 rounded-end-2 {{ Request::is('kelas*') ? 'active' : ''}}">
-        <a href="{{ route('dashboard') }}" class="text-decoration-none d-flex align-items-center text-dark">
+    <div class="side-link p-2 ps-3 rounded-end-2 {{ request()->is('profile.index') ? 'active' : ''}}">
+        <a href="{{ route('profile.index') }}" class="text-decoration-none d-flex align-items-center text-dark">
             <x-icon class="me-3" name="solar:settings-broken" width="28" height="28" />
             Pengaturan</a>
     </div>
