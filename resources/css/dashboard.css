@@ -109,3 +109,16 @@
    margin-top: 100px;
 }
 
+.shape-background{
+   position: absolute;
+   display: block;
+   height: 300px;
+   width: 100%;
+   background: rgb(16,96,170);
+   background: linear-gradient(63deg, rgba(16,96,170,1) 0%, rgba(19,104,184,1) 12%, rgba(20,109,192,1) 24%, rgba(101,170,234,1) 55%, rgba(178,218,255,1) 78%, rgba(255,255,255,1) 100%);
+   top: 0;
+   left: -10px;
+   /* z-index: -1; */
+
+}
+

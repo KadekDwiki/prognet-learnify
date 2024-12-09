@@ -6,7 +6,7 @@
     </div>
     <div class="nav-link p-2 ps-3 rounded-end-2 {{ request()->is('assignments*') ? 'active' : ''}}">
         <a href="/assignments/{{ $lessonId }}" class="text-decoration-none d-flex align-items-center text-dark">
-            Tugas
+            Tugas Kelas
         </a>
     </div>
     <div class="nav-link p-2 ps-3 rounded-end-2 {{ request()->is('members*') ? 'active' : ''}}">
