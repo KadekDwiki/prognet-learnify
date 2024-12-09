@@ -33,4 +33,5 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/classes', [ClassesController::class, 'index'])->name('classes');
     Route::get('/lessons/{id}', [ClassesController::class, 'show'])->name('classes.lessons');
+    Route::get('/lessons/{classId}/{lessonsId}', [ClassesController::class, 'showDetail'])->name('lessons.detail');
 });
