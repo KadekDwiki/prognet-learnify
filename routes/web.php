@@ -35,6 +35,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/classes', [ClassesController::class, 'index'])->name('classes');
     Route::get('/lessons/{id}', [ClassesController::class, 'show'])->name('classes.lessons');
+    
     Route::get('/dashboard/teachers', [DashboardController::class, 'dashboardTeachers'])->name('dashboard-teachers');
     Route::get('/dashboard/classes-teachers', [TeacherClassesController::class, 'show'])->name('classes-teachers');
     Route::get('/assignments{id}', [TeacherAssignmentsController::class, 'index'])->name('assignments.index');

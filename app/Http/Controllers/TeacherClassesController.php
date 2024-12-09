@@ -45,10 +45,14 @@ class TeacherClassesController extends Controller
      */
     public function show()
     {
-        $title = "Detail Kelas";
+        $title = "Detail Kelas Guru";
         $userId = Auth::id();
-        $classes = Classes::where('class_students.student_id', $userId);
-
+        // $classes = Classes::where('classes.teacher_id', $userId);
+        $classes = Classes::join('users', 'classes.teacher_id', '=', 'users.id')
+            ->select('classes.id as class_id', 'classes.name as class_name', 'users.name as teacher_name')
+            ->where('classes.teacher_id', $userId)
+            ->get();
+            
         return view('teachers.classes-teachers', compact('title', 'classes'));
     }
 
