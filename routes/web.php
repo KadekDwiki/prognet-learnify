@@ -33,4 +33,12 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/classes', [ClassesController::class, 'index'])->name('classes');
     Route::get('/lessons/{id}', [ClassesController::class, 'show'])->name('classes.lessons');
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile.index');
+        Route::post('/profile/update', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
+
+    });
+    
+
+
 });

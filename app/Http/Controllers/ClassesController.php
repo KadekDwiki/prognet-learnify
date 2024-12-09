@@ -54,6 +54,15 @@ class ClassesController extends Controller
         return view('students.lessons_class', compact('title', 'lessons', 'lessonId'));
     }
 
+    public function setting(string $id)
+    {
+        $title = "Setting";
+        $lessonId = $id;
+        $user = auth()->user();
+
+        return view('profile.profile', compact('title', 'lessonId', 'user'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
