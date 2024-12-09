@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Classes;
-use App\Models\ClassStudents;
 use Illuminate\Support\Facades\Auth;
 
 class TeacherClassesController extends Controller
@@ -18,7 +17,7 @@ class TeacherClassesController extends Controller
         $userId = Auth::id();
         $classes = Classes::join('users', 'classes.teacher_id', '=', 'users.id')
             ->select('classes.id as class_id', 'classes.name as class_name', 'users.name as teacher_name')
-            ->where('class_students.student_id', $userId)
+            ->where('classes.teacher_id', $userId)
             ->get();
 
         return view('teachers.classes-teachers', compact('title', 'classes'));
@@ -43,17 +42,14 @@ class TeacherClassesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function show(string $id)
     {
-        $title = "Detail Kelas Guru";
-        $userId = Auth::id();
-        // $classes = Classes::where('classes.teacher_id', $userId);
-        $classes = Classes::join('users', 'classes.teacher_id', '=', 'users.id')
-            ->select('classes.id as class_id', 'classes.name as class_name', 'users.name as teacher_name')
-            ->where('classes.teacher_id', $userId)
-            ->get();
+        $title = "Detail Kelas Guru"; 
+        $lessonId = $id;
+        $class = Classes::with('lessons')->find($id);
+        $lessons = $class->lessons;
             
-        return view('teachers.classes-teachers', compact('title', 'classes'));
+        return view('teachers.lessons-teachers', compact('title', 'lessons','lessonId'));
     }
 
     /**
