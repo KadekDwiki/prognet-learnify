@@ -69,7 +69,7 @@ class ClassesController extends Controller
     {
         $title = "Setting";
         $lessonId = $id;
-        $user = auth()->user();
+        $user = Auth::user();
 
         return view('profile.profile', compact('title', 'lessonId', 'user'));
     }
