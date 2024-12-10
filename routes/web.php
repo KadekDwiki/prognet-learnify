@@ -6,6 +6,8 @@ use App\Http\Controllers\ClassesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\TeacherAssignmentsController;
+use App\Http\Controllers\TeacherClassesController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 // Route::get('/', function () {
@@ -40,4 +42,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile.index');
     Route::post('/profile/update', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
+    
+    Route::get('/dashboard/teachers', [DashboardController::class, 'dashboardTeachers'])->name('dashboard-teachers');
+    Route::get('/dashboard/classes-teachers', [TeacherClassesController::class, 'index'])->name('classes-teachers');
+    Route::get('/dashboard/lessons-teachers/{id}', [TeacherClassesController::class, 'show'])->name('classes.lessons-teachers');
+    Route::get('/assignments{id}', [TeacherAssignmentsController::class, 'index'])->name('assignments.index');
+    
 });
