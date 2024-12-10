@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Classes;
 use Illuminate\Http\Request;
 use App\Models\ClassStudents;
+use App\Models\Lessons;
 use Illuminate\Support\Facades\Auth;
 
 class ClassesController extends Controller
@@ -46,7 +47,7 @@ class ClassesController extends Controller
      */
     public function show(string $id)
     {
-        $title = "Detail Kelas";
+        $title = "Daftar Topik";
         $lessonId = $id;
         $class = Classes::with('lessons')->find($id);
         $lessons = $class->lessons;
@@ -69,6 +70,24 @@ class ClassesController extends Controller
         return view('students.members', compact('title', 'lessonId', 'students', 'class'));
     }
 
+    public function showDetail(string $classId, string $lessonId)
+    {
+        $title = "Detail Topik";
+        $classId = $classId;
+        $lessonId = $lessonId;
+        $topics = Lessons::find($lessonId);
+
+        return view('students.lesson_detail', compact('title', 'topics', 'classId', 'lessonId'));
+    }
+
+    public function setting(string $id)
+    {
+        $title = "Setting";
+        $lessonId = $id;
+        $user = Auth::user();
+
+        return view('profile.profile', compact('title', 'lessonId', 'user'));
+    }
 
     /**
      * Show the form for editing the specified resource.
