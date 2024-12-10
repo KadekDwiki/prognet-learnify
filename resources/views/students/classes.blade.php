@@ -4,6 +4,11 @@
    <div class="header mb-3">
       <h4 class="text-primary text-capitalize">Selamat datang di kelas</h4>
       <p class="text-light-emphasis">Ingin mengikuti kelas apa hari ini?</p>
+         @if (session('success'))
+            <div class="alert alert-success">
+                  {{ session('success') }}
+            </div>
+         @endif
    </div>
    <div class="classes">
       <div class="class-cards gap-3">

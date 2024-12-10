@@ -44,6 +44,9 @@ class DashboardController extends Controller
             ->count();
 
         $pendingAssignments = ($allAssignments - $completedAssignments);
+        if($pendingAssignments <= 0){
+            $pendingAssignments=0;
+        }
 
         $classCount = ClassStudents::where('student_id', $userId)
             ->distinct('class_id')

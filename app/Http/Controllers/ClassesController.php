@@ -9,6 +9,8 @@ use App\Models\AssignmentsSubmissions;
 use Illuminate\Http\Request;
 use App\Models\ClassStudents;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 
 class ClassesController extends Controller
 {
@@ -132,6 +134,19 @@ class ClassesController extends Controller
         $user = Auth::user();
 
         return view('profile.profile', compact('title', 'lessonId', 'user'));
+    }
+
+    public function leaveClass(Request $request, $classId)
+    {
+        $user = auth()->user(); 
+    
+        // Hapus siswa dari kelas
+        DB::table('class_students')
+            ->where('class_id', $classId)
+            ->where('student_id', $user->id)
+            ->delete();
+    
+        return redirect()->route('classes')->with('success', 'Anda telah keluar dari kelas.');
     }
 
     /**

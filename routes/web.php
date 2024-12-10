@@ -37,6 +37,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/class/{id}/members', [ClassesController::class, 'showMembers'])->name('classes.members');
 
+    Route::post('/classes/{class}/leave', [ClassesController::class, 'leaveClass'])->name('classes.leave');
+
+
     Route::get('/lessons/{id}', [ClassesController::class, 'lessons'])->name('classes.lessons');
     Route::get('/lessons/{classId}/{lessonsId}', [ClassesController::class, 'lessonDetail'])->name('classes.lesson_detail');
     Route::get('/assignments/{id}', [ClassesController::class, 'assignments'])->name('classes.assignments');
