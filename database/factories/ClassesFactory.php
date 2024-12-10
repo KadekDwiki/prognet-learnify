@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,7 +20,8 @@ class ClassesFactory extends Factory
         return [
             'name' => $this->faker->words(3, true),
             'description' => $this->faker->paragraph(),
-            'teacher_id' => \App\Models\User::factory()->create(['role' => 'teacher'])->id,
+            'teacher_id' => $this->faker->numberBetween(1, 2),
+            'token' => Str::random(6)
         ];
     }
 }

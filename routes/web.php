@@ -34,11 +34,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/classes', [ClassesController::class, 'index'])->name('classes');
-    Route::get('/lessons/{id}', [ClassesController::class, 'show'])->name('classes.lessons');
 
     Route::get('/class/{id}/members', [ClassesController::class, 'showMembers'])->name('classes.members');
 
-    Route::get('/lessons/{classId}/{lessonsId}', [ClassesController::class, 'showDetail'])->name('lessons.detail');
+    Route::get('/lessons/{id}', [ClassesController::class, 'lessons'])->name('classes.lessons');
+    Route::get('/lessons/{classId}/{lessonsId}', [ClassesController::class, 'lessonDetail'])->name('classes.lesson_detail');
+    Route::get('/assignments/{id}', [ClassesController::class, 'assignments'])->name('classes.assignments');
+    Route::get('/assignments/{classId}/{assignmentId}', [ClassesController::class, 'assignmentDetail'])->name('classes.assignment_detail');
+    Route::post('/assignments/uploadsubmission', [ClassesController::class, 'handleStudentSubmission'])->name('classes.upload_submission');
 
     Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile.index');
     Route::post('/profile/update', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');

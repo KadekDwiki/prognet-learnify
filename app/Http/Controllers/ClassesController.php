@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Classes;
+use App\Models\Lessons;
+use App\Models\Assignments;
+use App\Models\AssignmentsSubmissions;
 use Illuminate\Http\Request;
 use App\Models\ClassStudents;
-use App\Models\Lessons;
 use Illuminate\Support\Facades\Auth;
 
 class ClassesController extends Controller
@@ -45,15 +47,16 @@ class ClassesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function lessons(string $id)
     {
         $title = "Daftar Topik";
         $lessonId = $id;
-        $class = Classes::with('lessons')->find($id);
-        $lessons = $class->lessons;
+        $classes = Classes::with('lessons')->find($id);
+        $lessons = $classes->lessons;
 
-        return view('students.lessons_class', compact('title', 'lessons', 'lessonId'));
+        return view('students.lessons.lessons_class', compact('title', 'lessons', 'lessonId'));
     }
+
 
     public function showMembers($id){
         $title = "Daftar Anggota Kelas";
@@ -70,14 +73,56 @@ class ClassesController extends Controller
         return view('students.members', compact('title', 'lessonId', 'students', 'class'));
     }
 
-    public function showDetail(string $classId, string $lessonId)
+    public function lessonDetail(string $classId, string $lessonId)
     {
         $title = "Detail Topik";
         $classId = $classId;
         $lessonId = $lessonId;
         $topics = Lessons::find($lessonId);
 
-        return view('students.lesson_detail', compact('title', 'topics', 'classId', 'lessonId'));
+        return view('students.lessons.lesson_detail', compact('title', 'topics', 'classId', 'lessonId'));
+    }
+
+    public function assignments(string $id)
+    {
+        $title = "Daftar Tugas";
+        $lessonId = $id;
+        $classes = Classes::with('assignments')->find($id);
+        $assignments = $classes->assignments;
+
+        return view('students.assignments.assignments_class', compact('title', 'assignments', 'lessonId'));
+    }
+
+    public function assignmentDetail(string $classId, string $assignmentId)
+    {
+        $title = "Detail Topik";
+        $classId = $classId;
+        $assignmentId = $assignmentId;
+        $assignment = Assignments::find($assignmentId);
+
+        return view('students.assignments.assignment_detail', compact('title', 'assignment', 'classId', 'assignmentId'));
+    }
+
+    public function handleStudentSubmission(Request $request)
+    {
+        // Validate the incoming request
+        $request->validate([
+            'file' => 'required|file|mimes:jpg,png,pdf,docx|max:1048',
+        ]);
+
+        // Prepare the data for insertion
+        $validate = [
+            'file_url' => $request->file('file')->store('uploads', 'public'),
+            'assignment_id' => $request->assignment_id,
+        ];
+
+        $validate['student_id'] = Auth::user()->id;
+
+        // Create a new submission record
+        AssignmentsSubmissions::create($validate);
+
+        // Redirect with a success message
+        return redirect()->back()->with('success', 'Tugas berhasil di serahkan');
     }
 
     public function setting(string $id)
