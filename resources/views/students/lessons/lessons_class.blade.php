@@ -15,9 +15,9 @@
                      <x-icon class="me-3 text-primary" name="solar:notebook-broken" width="48" height="48" />
                   </div>
                   <div class="desc w-75">
-                     <h4>{{ $lesson->title }}</h4>
-                     <p class="mb-0">{{ Str::limit($lesson->title, 40, '...') }}</p>
-                     <a href="/lessons/{{ $lesson->class_id }}/{{ $lesson->id }}">lihat kelas</a>
+                     <h5>{{ Str::limit($lesson->title, 40, '...') }}</h5>
+                     <p class="mb-0">{{ Str::limit($lesson->content, 40, '...') }}</p>
+                     <a href="/lessons/{{ $lesson->class_id }}/{{ $lesson->id }}">Lihat kelas</a>
                   </div>
                   <div class="action">
                      <span class="btn btn-primary">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Classes;
 use App\Models\Lessons;
 use App\Models\Assignments;
+use App\Models\AssignmentsSubmissions;
 use Illuminate\Http\Request;
 use App\Models\ClassStudents;
 use Illuminate\Support\Facades\Auth;
@@ -83,9 +84,29 @@ class ClassesController extends Controller
         $assignmentId = $assignmentId;
         $assignment = Assignments::find($assignmentId);
 
-        dd($assignment);
+        return view('students.assignments.assignment_detail', compact('title', 'assignment', 'classId', 'assignmentId'));
+    }
 
-        return view('students.lessons.lesson_detail', compact('title', 'topics', 'classId', 'lessonId'));
+    public function handleStudentSubmission(Request $request)
+    {
+        // Validate the incoming request
+        $request->validate([
+            'file' => 'required|file|mimes:jpg,png,pdf,docx|max:1048',
+        ]);
+
+        // Prepare the data for insertion
+        $validate = [
+            'file_url' => $request->file('file')->store('uploads', 'public'),
+            'assignment_id' => $request->assignment_id,
+        ];
+
+        $validate['student_id'] = Auth::user()->id;
+
+        // Create a new submission record
+        AssignmentsSubmissions::create($validate);
+
+        // Redirect with a success message
+        return redirect()->back()->with('success', 'Tugas berhasil di serahkan');
     }
 
     public function setting(string $id)
