@@ -20,4 +20,10 @@ class Classes extends Model
     {
         return $this->hasMany(Lessons::class, 'class_id');
     }
+
+    public function students()
+    {
+        return $this->belongsToMany(User::class, 'class_students', 'class_id', 'student_id');
+    }
+
 }

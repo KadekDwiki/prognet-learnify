@@ -54,6 +54,21 @@ class ClassesController extends Controller
         return view('students.lessons_class', compact('title', 'lessons', 'lessonId'));
     }
 
+    public function showMembers($id){
+        $title = "Daftar Anggota Kelas";
+        
+        // Ambil kelas berdasarkan ID dan hubungkan dengan data murid
+        $class = Classes::with(['students' => function($query) {
+            $query->select('users.id', 'users.name', 'users.email'); // Pilih kolom yang ingin diambil
+        }])->findOrFail($id);
+
+        // Ambil semua murid dari kelas tersebut
+        $students = $class->students;
+
+        return view('students.members', compact('title', 'students', 'class'));
+    }
+
+
     /**
      * Show the form for editing the specified resource.
      */

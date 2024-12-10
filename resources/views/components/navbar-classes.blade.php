@@ -9,8 +9,8 @@
             Tugas Kelas
         </a>
     </div>
-    <div class="nav-link p-2 ps-3 rounded-end-2 {{ request()->is('members*') ? 'active' : ''}}">
-        <a href="/members/{{ $lessonId }}" class="text-decoration-none d-flex align-items-center text-dark">
+    <div class="nav-link p-2 ps-3 rounded-end-2 {{ request()->is('class/*/members') ? 'active' : ''}}">
+        <a href="/class/{{ $lessonId }}/members" class="text-decoration-none d-flex align-items-center text-dark">
             Anggota
         </a>
     </div>
