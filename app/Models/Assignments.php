@@ -10,14 +10,17 @@ class Assignments extends Model
     /** @use HasFactory<\Database\Factories\AssignmentsFactory> */
     use HasFactory;
     protected $fillable = [
-        'title', 'description', 'due_date', 'class_id'
+        'title',
+        'description',
+        'due_date',
+        'class_id'
     ];
 
-    // /**
-    //  * Relasi dengan tabel Class.
-    //  */
-    // public function class()
-    // {
-    //     return $this->belongsTo(Classroom::class, 'class_id'); // Relasi ke model Classroom
-    // }
+    /**
+     * Relasi dengan tabel Class.
+     */
+    public function classes()
+    {
+        return $this->belongsTo(Classes::class, 'class_id'); // Relasi ke model Classroom
+    }
 }

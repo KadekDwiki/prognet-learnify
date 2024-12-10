@@ -17,8 +17,8 @@ class ClassStudentsFactory extends Factory
     public function definition(): array
     {
         return [
-            'class_id' => \App\Models\Classes::factory(),
-            'student_id' => \App\Models\User::factory()->create(['role' => 'student'])->id,
+            'class_id' => $this->faker->numberBetween(1, 10),
+            'student_id' => $this->faker->numberBetween(3, 10),
             'joined_at' => now(),
         ];
     }

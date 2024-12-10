@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Classes;
+use App\Models\Lessons;
+use App\Models\Assignments;
 use Illuminate\Http\Request;
 use App\Models\ClassStudents;
-use App\Models\Lessons;
 use Illuminate\Support\Facades\Auth;
 
 class ClassesController extends Controller
@@ -45,24 +46,46 @@ class ClassesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function lessons(string $id)
     {
         $title = "Daftar Topik";
         $lessonId = $id;
-        $class = Classes::with('lessons')->find($id);
-        $lessons = $class->lessons;
+        $classes = Classes::with('lessons')->find($id);
+        $lessons = $classes->lessons;
 
-        return view('students.lessons_class', compact('title', 'lessons', 'lessonId'));
+        return view('students.lessons.lessons_class', compact('title', 'lessons', 'lessonId'));
     }
 
-    public function showDetail(string $classId, string $lessonId)
+    public function lessonDetail(string $classId, string $lessonId)
     {
         $title = "Detail Topik";
         $classId = $classId;
         $lessonId = $lessonId;
         $topics = Lessons::find($lessonId);
 
-        return view('students.lesson_detail', compact('title', 'topics', 'classId', 'lessonId'));
+        return view('students.lessons.lesson_detail', compact('title', 'topics', 'classId', 'lessonId'));
+    }
+
+    public function assignments(string $id)
+    {
+        $title = "Daftar Tugas";
+        $lessonId = $id;
+        $classes = Classes::with('assignments')->find($id);
+        $assignments = $classes->assignments;
+
+        return view('students.assignments.assignments_class', compact('title', 'assignments', 'lessonId'));
+    }
+
+    public function assignmentDetail(string $classId, string $assignmentId)
+    {
+        $title = "Detail Topik";
+        $classId = $classId;
+        $assignmentId = $assignmentId;
+        $assignment = Assignments::find($assignmentId);
+
+        dd($assignment);
+
+        return view('students.lessons.lesson_detail', compact('title', 'topics', 'classId', 'lessonId'));
     }
 
     public function setting(string $id)
