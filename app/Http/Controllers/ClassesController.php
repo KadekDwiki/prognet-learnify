@@ -56,6 +56,7 @@ class ClassesController extends Controller
 
     public function showMembers($id){
         $title = "Daftar Anggota Kelas";
+        $lessonId = $id;
         
         // Ambil kelas berdasarkan ID dan hubungkan dengan data murid
         $class = Classes::with(['students' => function($query) {
@@ -65,7 +66,7 @@ class ClassesController extends Controller
         // Ambil semua murid dari kelas tersebut
         $students = $class->students;
 
-        return view('students.members', compact('title', 'students', 'class'));
+        return view('students.members', compact('title', 'lessonId', 'students', 'class'));
     }
 
 
