@@ -1,7 +1,7 @@
 @extends('layouts.authenticated')
 
 @section('content')
-   <x-navbar-classes :lessonId="$lessonId"/>
+   <x-navbar-classes :lessonId="$classId"/>
    <div class="content-classes d-flex justify-content-center w-100">
       <div class="d-flex w-75 align-items-center flex-column gap-3">
          <div class="progress w-100" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
@@ -20,7 +20,7 @@
                      <p class="border-bottom mb-0">{{ $assignment->created_at->diffForHumans() }}</p>
                   </div>
                   <div class="action">
-                    <a href="/teachers-assignments/{{ $classId }}/{{ $lessonId }}" class="btn btn-sm btn-primary">
+                     <a href="/teachers-assignments/{{ $classId }}/{{ $assignment->id}}" class="btn btn-sm btn-primary">
                         <x-icon class="" name="solar:eye-broken" width="28" height="28" />
                      </a>
                      <a href="" class="btn btn-sm btn-warning">

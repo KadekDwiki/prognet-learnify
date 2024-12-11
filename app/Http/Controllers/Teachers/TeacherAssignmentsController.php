@@ -11,23 +11,20 @@ class TeacherAssignmentsController extends Controller
     /**
      * Display a listing of the resource.
      */
-        /**
+    /**
      * Menampilkan daftar tugas kelas.
      *
      * @return \Illuminate\View\View
      */
-    public function index(string $lessonId, string $classId)
+    public function index(string $classId)
     {
-        // Mengambil semua data tugas kelas
-        $assignments = Assignments::all();
 
-        $title = 'Tugas';
-        $assignments = Assignments::where('class_id', $classId)
-                        ->where('id', $lessonId)
-                        ->get();
+        $title = 'Tugas Kelas';
+        $classId = $classId;
+        $assignments = Assignments::where('class_id', $classId)->get();
 
         // Menampilkan view 'assignments.index' dengan data assignments
-        return view('teachers.assignments-teacher.assignments', compact('assignments','title', 'classId', 'lessonId'));
+        return view('teachers.assignments-teacher.assignments', compact('assignments', 'title', 'classId'));
     }
 
 
