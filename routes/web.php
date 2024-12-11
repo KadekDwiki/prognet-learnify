@@ -41,8 +41,11 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/profile/update', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
     
     Route::get('/dashboard/teachers', [DashboardController::class, 'dashboardTeachers'])->name('dashboard-teachers');
+
     Route::get('/dashboard/classes-teachers', [TeacherClassesController::class, 'index'])->name('classes-teachers');
     Route::get('/dashboard/lessons-teachers/{id}', [TeacherClassesController::class, 'show'])->name('classes.lessons-teachers');
+    Route::get('/lessons/{classId}/{lessonsId}', [ClassesController::class, 'showDetail'])->name('lessons.detail');
+    
     Route::get('/assignments{id}', [TeacherAssignmentsController::class, 'index'])->name('assignments.index');
     
 });
