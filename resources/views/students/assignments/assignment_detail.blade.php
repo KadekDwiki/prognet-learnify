@@ -31,23 +31,37 @@
                   </div>
                @endif
                
-               <form action="{{ route('classes.upload_submission') }}" method="POST" enctype="multipart/form-data" class="pt-5 border-top border-secondary">
-                  @csrf
-                  <input type="text" name="assignment_id" value="{{ $assignmentId }}" hidden>
-                  <label for="images" class="drop-container @error('file') is-invalid border-danger @enderror" id="dropcontainer">
-                     <span class="drop-title">Upload file tugasmu</span>
-                     or
-                     <div class="input-group w-50">
-                        <input type="file" name="file" class="form-control border-primary" id="input-file" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+               @if (empty($submission))
+                  <form action="{{ route('classes.upload_submission') }}" method="POST" enctype="multipart/form-data" class="pt-5 border-top border-secondary">
+                     @csrf
+                     <input type="text" name="assignment_id" value="{{ $assignmentId }}" hidden>
+                     <label for="images" class="drop-container @error('file') is-invalid border-danger @enderror" id="dropcontainer">
+                        <span class="drop-title">Upload file tugasmu</span>
+                        or
+                        <div class="input-group w-50">
+                           <input type="file" name="file" class="form-control border-primary" id="input-file" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                        </div>
+                     </label>
+                     @error('file')
+                     <div class="invalid-feedback">
+                        {{ $message }}
                      </div>
-                  </label>
-                  @error('file')
-                  <div class="invalid-feedback">
-                     {{ $message }}
+                     @enderror
+                     <button type="submit" class="btn btn-primary mt-4 w-100">Kirim</button>
+                  </form>
+               @else
+                  <h1>anda sudah mengumpulkan tugas</h1>
+                  <div class="d-flex align-items-center bg-body-secondary bg-opacity-50 shadow-sm p-3 rounded-3">
+                     <div class="card-icon me-3">
+                        <x-icon class="text-primary" name="akar-icons:file" height="44" width="44" />
+                     </div>
+                        <div class="card-desc">
+                           <a href="{{ asset('storage/' . $submission->file_url) }}" class="text-dark text-decoration-none" target="_blank">
+                              {{ Str::limit($submission->file_url, 70, '...') }}
+                           </a>
+                        </div>
                   </div>
-                  @enderror
-                  <button type="submit" class="btn btn-primary mt-4 w-100">Kirim</button>
-               </form>
+               @endif
          </div>
       </div>
    </div>

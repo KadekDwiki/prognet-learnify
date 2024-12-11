@@ -84,23 +84,29 @@ class ClassesController extends Controller
         $assignmentId = $assignmentId;
         $assignment = Assignments::find($assignmentId);
 
-        return view('students.assignments.assignment_detail', compact('title', 'assignment', 'classId', 'assignmentId'));
+        $submission = AssignmentsSubmissions::where('assignment_id', $assignmentId)
+            ->where('student_id', Auth::user()->id)
+            ->first();
+
+        return view('students.assignments.assignment_detail', compact('title', 'assignment', 'classId', 'assignmentId', 'submission'));
     }
 
     public function handleStudentSubmission(Request $request)
     {
-        // Validate the incoming request
         $request->validate([
             'file' => 'required|file|mimes:jpg,png,pdf,docx|max:1048',
         ]);
 
-        // Prepare the data for insertion
-        $validate = [
-            'file_url' => $request->file('file')->store('uploads', 'public'),
-            'assignment_id' => $request->assignment_id,
-        ];
+        $file = $request->file('file');
+        $originalFileName = $file->getClientOriginalName();
+        $filePath = $file->storeAs('uploads/student-submissions', $originalFileName, 'public');
 
-        $validate['student_id'] = Auth::user()->id;
+        $validate = [
+            'file_url' => $filePath,
+            'assignment_id' => $request->assignment_id,
+            'student_id' => Auth::user()->id,
+            'submitted_at' => now()
+        ];
 
         // Create a new submission record
         AssignmentsSubmissions::create($validate);
