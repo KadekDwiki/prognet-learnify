@@ -49,7 +49,7 @@ class TeacherAssignmentsController extends Controller
      */
     public function show(string $id)
     {
-        //
+        // 
     }
 
     /**
