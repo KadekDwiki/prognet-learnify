@@ -48,7 +48,25 @@ class TeacherLessonsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'files.*' => 'nullable|mimes:jpg,png,pdf|max:2048',
+        ]);
+
+        // Simpan data tugas
+        $assignment = Lessons::create([
+            'title' => $request->input('title'),
+        ]);
+
+        // Simpan file jika ada
+        if ($request->hasFile('files')) {
+            foreach ($request->file('files') as $file) {
+                $path = $file->store('assignments', 'public');
+                $assignment->files()->create(['path' => $path]);
+            }
+        }
+
+        return redirect()->route('assignments.index')->with('success', 'Tugas berhasil dibuat!');
     }
 
     /**
