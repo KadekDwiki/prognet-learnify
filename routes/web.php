@@ -37,6 +37,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/classes', [ClassesController::class, 'index'])->name('classes');
 
+    Route::post('/join-class', [ClassesController::class, 'joinClass'])->name('join.class');
+
     Route::get('/class/{id}/members', [ClassesController::class, 'showMembers'])->name('classes.members');
     Route::post('/classes/{class}/leave', [ClassesController::class, 'leaveClass'])->name('classes.leave');
 

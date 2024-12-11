@@ -46,6 +46,47 @@ class ClassesController extends Controller
         //
     }
 
+    public function joinClass(Request $request)
+    {
+        // Validasi input
+        $request->validate([
+            'classCode' => 'required|string|max:255',
+        ]);
+
+        // Ambil kode kelas dari input
+        $classCode = $request->input('classCode');
+        $user = auth()->user();
+
+        // Cari kelas berdasarkan token (kode kelas)
+        $class = Classes::where('token', $classCode)->first();
+
+        // Jika kelas tidak ditemukan
+        if (!$class) {
+            return redirect()->back()->with('error', 'Kode kelas tidak valid.');
+        }
+
+        // Cek apakah siswa sudah tergabung di kelas ini
+        $existingStudent = DB::table('class_students')
+            ->where('class_id', $class->id)
+            ->where('student_id', $user->id)
+            ->first();
+
+        // Jika sudah tergabung, tampilkan pesan error
+        if ($existingStudent) {
+            return redirect()->back()->with('error', 'Anda sudah tergabung di kelas ini.');
+        }
+
+        // Masukkan siswa ke dalam kelas
+        DB::table('class_students')->insert([
+            'class_id' => $class->id,
+            'student_id' => $user->id,
+            'joined_at' => now(),
+        ]);
+
+        // Berikan pesan sukses
+        return redirect()->route('classes')->with('success', 'Anda berhasil bergabung ke kelas!');
+    }
+
     /**
      * Display the specified resource.
      */
