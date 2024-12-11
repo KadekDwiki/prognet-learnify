@@ -8,6 +8,14 @@
             <div class="progress-bar" style="width: 25%">25%</div>
          </div>
 
+         <div class="add-lesson w-100 d-flex justify-content-end">
+            <a href="" class="btn btn-primary">
+                {{-- {{route('add-assignment', $classId)}} --}}
+               <x-icon class="" name="ic:round-plus" width="20" height="20" />
+               Tambah Tugas
+            </a>
+         </div>
+
          <div class="row w-100 mt-4 gap-4">
             @foreach ($assignments as $assignment) 
             <div class="card-lessons d-flex p-3 w-100 justify-content-between align-items-center bg-body-secondary rounded-2 shadow-sm">
