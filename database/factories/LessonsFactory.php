@@ -20,7 +20,7 @@ class LessonsFactory extends Factory
             'title' => $this->faker->sentence(),
             'content' => $this->faker->paragraph(),
             'file_url' => $this->faker->optional()->url(),
-            'class_id' => \App\Models\Classes::factory(),
+            'class_id' => $this->faker->numberBetween(1, 10),
         ];
     }
 }
