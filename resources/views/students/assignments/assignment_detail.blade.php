@@ -4,13 +4,13 @@
    <x-navbar-classes :lessonId="$classId"/>
    <div class="content-classes d-flex justify-content-center w-100">
       <div class="d-flex w-75 align-items-center flex-column gap-3">
-         <div class="row w-100 mt-4 gap-3">
+         <div class="row w-100 mt-4 gap-2">
             @if (session('success'))
                <div class="alert alert-success">
                      {{ session('success') }}
                </div>
             @endif
-               <div class="description">
+               <div class="description px-0">
                   <h3>{{ $assignment->title }}</h3>
                   <p class="border-bottom text-secondary pb-4">Dibuat: {{ $assignment->created_at->diffForHumans() }}</p>
                   <p>
@@ -50,16 +50,15 @@
                      <button type="submit" class="btn btn-primary mt-4 w-100">Kirim</button>
                   </form>
                @else
-                  <h1>anda sudah mengumpulkan tugas</h1>
-                  <div class="d-flex align-items-center bg-body-secondary bg-opacity-50 shadow-sm p-3 rounded-3">
-                     <div class="card-icon me-3">
-                        <x-icon class="text-primary" name="akar-icons:file" height="44" width="44" />
-                     </div>
-                        <div class="card-desc">
-                           <a href="{{ asset('storage/' . $submission->file_url) }}" class="text-dark text-decoration-none" target="_blank">
-                              {{ Str::limit($submission->file_url, 70, '...') }}
-                           </a>
-                        </div>
+                  <div class="pt-4 mt-4 px-0 border-top">
+                     <div class="alert alert-success" role="alert">
+                        <h4 class="alert-heading">Well done!</h4>
+                        <p>Aww yeah, kamu berhasil mengumpulkan tugasmu itu sangat keren mantap keren aseli keren banget, tunggu tugasmu akan dinilai ya dan nikmati hasil dari kerja kerasmu</p>
+                        <hr>
+                        <p class="mb-0"> Pratinjau tugasmu: <a href="{{ asset('storage/' . $submission->file_url) }}" class="text-dark text-decoration-none fw-semibold" target="_blank">
+                           {{ Str::limit($submission->file_url, 70, '...') }}
+                        </a></p>
+                     </div>  
                   </div>
                @endif
          </div>
