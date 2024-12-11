@@ -59,18 +59,14 @@ class ClassesController extends Controller
         return view('students.lessons.lessons_class', compact('title', 'lessons', 'lessonId'));
     }
 
-
-    public function showMembers($id){
+    public function showMembers($id)
+    {
         $title = "Daftar Anggota Kelas";
         $lessonId = $id;
         
-        // Ambil kelas berdasarkan ID dan hubungkan dengan data murid
-        $class = Classes::with(['students' => function($query) {
-            $query->select('users.id', 'users.name', 'users.email'); // Pilih kolom yang ingin diambil
-        }])->findOrFail($id);
+        $class = Classes::findOrFail($id);
 
-        // Ambil semua murid dari kelas tersebut
-        $students = $class->students;
+        $students = $class->students()->paginate(10);
 
         return view('students.members', compact('title', 'lessonId', 'students', 'class'));
     }
@@ -140,7 +136,6 @@ class ClassesController extends Controller
     {
         $user = auth()->user(); 
     
-        // Hapus siswa dari kelas
         DB::table('class_students')
             ->where('class_id', $classId)
             ->where('student_id', $user->id)

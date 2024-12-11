@@ -36,7 +36,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/classes', [ClassesController::class, 'index'])->name('classes');
 
     Route::get('/class/{id}/members', [ClassesController::class, 'showMembers'])->name('classes.members');
-
     Route::post('/classes/{class}/leave', [ClassesController::class, 'leaveClass'])->name('classes.leave');
 
 

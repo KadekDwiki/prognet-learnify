@@ -25,6 +25,11 @@
                     @endforeach
                 </tbody>
             </table>
+
+            <div class="d-flex justify-content-center grid gap-2 column-gap-3">
+                
+                {{ $students->links() }}
+            </div>
         </div>        
     </div>
 
@@ -48,4 +53,6 @@
             </div>
         </div>
     </div>
+
+    
 @endsection
