@@ -16,16 +16,17 @@ class TeacherAssignmentsController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function index(string $id)
+    public function index(string $id, string $lessonId)
     {
         // Mengambil semua data tugas kelas
         $assignments = Assignments::all();
 
         $title = 'Tugas';
+        $lessonId = $lessonId;
         $assignmentsId = $id;
 
         // Menampilkan view 'assignments.index' dengan data assignments
-        return view('teachers.assignments-teacher.assignments', compact('assignments','title', 'assignmentsId'));
+        return view('teachers.assignments-teacher.assignments', compact('assignments','title', 'lessonId', 'assignmentsId'));
     }
 
 

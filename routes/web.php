@@ -54,5 +54,5 @@ Route::middleware(['auth'])->group(function () {
     
     Route::get('/add-lessons/{classId}', [TeacherLessonsController::class, 'create'])->name('add-lessons');
 
-    Route::get('/assignments/{id}', [TeacherAssignmentsController::class, 'index'])->name('assignments.index');
+    Route::get('/teachers-assignments/{id}/{lessonId}', [TeacherAssignmentsController::class, 'index'])->name('assignments.index');
 });
