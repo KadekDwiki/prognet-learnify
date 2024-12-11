@@ -20,7 +20,7 @@
                      <p class="border-bottom mb-0">{{ $assignment->created_at->diffForHumans() }}</p>
                   </div>
                   <div class="action">
-                    <a href="" class="btn btn-sm btn-primary">
+                    <a href="/teachers-assignments/{{ $classId }}/{{ $lessonId }}" class="btn btn-sm btn-primary">
                         <x-icon class="" name="solar:eye-broken" width="28" height="28" />
                      </a>
                      <a href="" class="btn btn-sm btn-warning">
