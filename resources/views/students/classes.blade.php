@@ -5,8 +5,8 @@
       <h4 class="text-primary text-capitalize">Selamat datang di kelas</h4>
       <p class="text-light-emphasis">Ingin mengikuti kelas apa hari ini?</p>
       <div class="d-flex align-items-center flex-column gap-3">
-         <div class="d-flex justify-content-center mt-2 mx-3 ms-auto">
-            <button type="button" class="btn btn-outline-primary">Gabung Kelas</button>
+         <div class="d-flex justify-content-center my-2 mx-3 ms-auto">
+            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#joinClassModal">Gabung Kelas</button>
          </div>
       </div>
       
