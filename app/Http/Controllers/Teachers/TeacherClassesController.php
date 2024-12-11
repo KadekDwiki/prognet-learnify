@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Teachers;
 
-use Illuminate\Http\Request;
 use App\Models\Classes;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class TeacherClassesController extends Controller
@@ -13,7 +14,7 @@ class TeacherClassesController extends Controller
      */
     public function index()
     {
-        $title = "Daftar Kelas";
+        $title = "Daftar Kelas Guru";
         $userId = Auth::id();
         $classes = Classes::join('users', 'classes.teacher_id', '=', 'users.id')
             ->select('classes.id as class_id', 'classes.name as class_name', 'users.name as teacher_name')
@@ -22,7 +23,6 @@ class TeacherClassesController extends Controller
 
         return view('teachers.classes-teachers', compact('title', 'classes'));
     }
-
     /**
      * Show the form for creating a new resource.
      */
@@ -42,15 +42,6 @@ class TeacherClassesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        $title = "Detail Kelas Guru"; 
-        $lessonId = $id;
-        $class = Classes::with('lessons')->find($id);
-        $lessons = $class->lessons;
-            
-        return view('teachers.lessons-teachers', compact('title', 'lessons','lessonId'));
-    }
 
     /**
      * Show the form for editing the specified resource.
