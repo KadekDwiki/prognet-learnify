@@ -6,9 +6,11 @@ use App\Http\Controllers\ClassesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\TeacherAssignmentsController;
-use App\Http\Controllers\TeacherClassesController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+use App\Http\Controllers\Teachers\TeacherClassesController;
+use App\Http\Controllers\Teachers\TeacherLessonsController;
+use App\Http\Controllers\Teachers\TeacherAssignmentsController;
+use App\Http\Controllers\Teacher\TeacherAssignmentsController as TeacherTeacherAssignmentsController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -45,10 +47,12 @@ Route::middleware(['auth'])->group(function () {
     
     Route::get('/dashboard/teachers', [DashboardController::class, 'dashboardTeachers'])->name('dashboard-teachers');
 
-    Route::get('/dashboard/classes-teachers', [TeacherClassesController::class, 'index'])->name('classes-teachers');
-    Route::get('/dashboard/lessons-teachers/{id}', [TeacherClassesController::class, 'show'])->name('classes.lessons-teachers');
-    Route::get('/lessons/{classId}/{lessonsId}', [ClassesController::class, 'showDetail'])->name('lessons.detail');
+    Route::get('/classes-teachers', [TeacherClassesController::class, 'index'])->name('classes-teachers');
+
+    Route::get('/lessons-teachers/{id}', [TeacherLessonsController::class, 'index'])->name('classes.lessons-teachers');
+    Route::get('/lessons-teachers/{classId}/{lessonsId}', [TeacherLessonsController::class, 'show'])->name('lessons.detail');
     
-    Route::get('/assignments{id}', [TeacherAssignmentsController::class, 'index'])->name('assignments.index');
-    
+    Route::get('/add-lessons/{classId}', [TeacherLessonsController::class, 'create'])->name('add-lessons');
+
+    Route::get('/assignments/{id}', [TeacherAssignmentsController::class, 'index'])->name('assignments.index');
 });
