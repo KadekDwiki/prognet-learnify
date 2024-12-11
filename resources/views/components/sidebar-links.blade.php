@@ -24,7 +24,7 @@
     {{-- kelas teachers atau lihat semua kelas di teachers --}}
     <div class="side-link p-2 ps-3 rounded-end-2 {{ Request::is('kelas*') ? 'active' : ''}}">
         <a href="{{ route('classes-teachers') }}" class="text-decoration-none d-flex align-items-center text-dark">
-            <x-icon class="me-3" name="solar:settings-broken" width="28" height="28" />
+            <x-icon class="me-3" name="solar:notebook-bookmark-broken" width="28" height="28" />
             Kelas Guru</a>
     </div>
 </div>
