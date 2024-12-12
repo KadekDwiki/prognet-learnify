@@ -32,9 +32,9 @@ Route::middleware(['guest'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+    // route for edit profile
     Route::get('/classes', [ClassesController::class, 'index'])->name('classes');
 
     Route::post('/join-class', [ClassesController::class, 'joinClass'])->name('join.class');
@@ -51,15 +51,26 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile.index');
     Route::post('/profile/update', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
-    
-    Route::get('/dashboard/teachers', [DashboardController::class, 'dashboardTeachers'])->name('dashboard-teachers');
 
-    Route::get('/classes-teachers', [TeacherClassesController::class, 'index'])->name('classes-teachers');
+    Route::middleware(['role:student'])->group(function () {
+        Route::get('/classes', [ClassesController::class, 'index'])->name('classes');
 
-    Route::get('/lessons-teachers/{id}', [TeacherLessonsController::class, 'index'])->name('classes.lessons-teachers');
-    Route::get('/lessons-teachers/{classId}/{lessonsId}', [TeacherLessonsController::class, 'show'])->name('lessons.detail');
-    
-    Route::get('/add-lessons/{classId}', [TeacherLessonsController::class, 'create'])->name('add-lessons');
+        Route::get('/lessons/{id}', [ClassesController::class, 'lessons'])->name('classes.lessons');
+        Route::get('/lessons/{classId}/{lessonsId}', [ClassesController::class, 'lessonDetail'])->name('classes.lesson_detail');
 
-    Route::get('/assignments/{id}', [TeacherAssignmentsController::class, 'index'])->name('assignments.index');
+        Route::get('/assignments/{id}', [ClassesController::class, 'assignments'])->name('classes.assignments');
+        Route::get('/assignments/{classId}/{assignmentId}', [ClassesController::class, 'assignmentDetail'])->name('classes.assignment_detail');
+        Route::post('/assignments/uploadsubmission', [ClassesController::class, 'handleStudentSubmission'])->name('classes.upload_submission');
+    });
+
+    Route::middleware(['role:teacher'])->group(function () {
+        // Route::get('/dashboard/teachers', [DashboardController::class, 'dashboardTeachers'])->name('dashboard-teachers');
+        Route::get('/classes-teachers', [TeacherClassesController::class, 'index'])->name('classes-teachers');
+
+        Route::get('/lessons-teachers/{id}', [TeacherLessonsController::class, 'index'])->name('classes.lessons-teachers');
+        Route::get('/lessons-teachers/{classId}/{lessonsId}', [TeacherLessonsController::class, 'show'])->name('lessons.detail');
+        Route::get('/add-lessons/{classId}', [TeacherLessonsController::class, 'create'])->name('add-lessons');
+
+        Route::get('/assignments-teachers/{classId}', [TeacherAssignmentsController::class, 'index'])->name('assignments.index');
+    });
 });

@@ -4,7 +4,10 @@
         <img src="{{ asset('images/class-card-math.png') }}" alt="">
     </div>
     <div class="description d-flex gap-2 flex-column w-100">
-        <a href="/lessons/{{ $classId }}" class="btn btn-primary btn-sm rounded-pill px-3" style="width: fit-content">
+        <a href="{{ 
+                auth()->user()->role == 'student' ? '/lessons/' . $classId : '/lessons-teachers/' . $classId
+            }}"
+            class="btn btn-primary btn-sm rounded-pill px-3" style="width: fit-content">
             {{ $name }}
         </a>
         <h6 class="break-word">{{ $teacher }}</h6>

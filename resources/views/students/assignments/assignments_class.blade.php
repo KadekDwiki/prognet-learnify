@@ -17,7 +17,7 @@
                   <div class="desc w-75">
                      <h5>{{ Str::limit($assignment->title, 40, '...') }}</h5>
                      <p class="mb-0">{{ Str::limit($assignment->content, 40, '...') }}</p>
-                     <a href="/assignments/{{ $assignment->class_id }}/{{ $assignment->id }}">Lihat kelas</a>
+                     <a href="/assignments/{{ $assignment->class_id }}/{{ $assignment->id }}">Lihat Tugas</a>
                   </div>
                   <div class="action">
                      <span class="btn btn-primary">
