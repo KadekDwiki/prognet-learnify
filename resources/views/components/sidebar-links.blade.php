@@ -3,28 +3,41 @@
     <div class="side-link p-2 ps-3 rounded-end-2 {{ request()->is('dashboard') ? 'active' : ''}}">
         <a href="{{ route('dashboard') }}" class="text-decoration-none d-flex align-items-center text-dark">
             <x-icon class="me-3" name="solar:home-2-broken" width="28" height="28" />
-            Beranda</a>
-    </div>
-    <div class="side-link p-2 ps-3 rounded-end-2 {{ Request::is('kelas*') ? 'active' : ''}}">
-        <a href="{{ route('classes') }}" class="text-decoration-none d-flex align-items-center text-dark">
-            <x-icon class="me-3" name="solar:notebook-bookmark-broken" width="28" height="28" />
-            Kelas</a>
-    </div>
-    <div class="side-link p-2 ps-3 rounded-end-2 {{ Request::is('kelas*') ? 'active' : ''}}">
-    <a href="{{ route('classes') }}" class="text-decoration-none d-flex align-items-center text-dark">
-        <x-icon class="me-3" name="solar:bell-broken" width="28" height="28" />
-        Pengingat</a>
-    </div>
-    <div class="side-link p-2 ps-3 rounded-end-2 {{ request()->is('profile.index') ? 'active' : ''}}">
-        <a href="{{ route('profile.index') }}" class="text-decoration-none d-flex align-items-center text-dark">
-            <x-icon class="me-3" name="solar:settings-broken" width="28" height="28" />
-            Pengaturan</a>
+            Beranda
+        </a>
     </div>
 
-    {{-- kelas teachers atau lihat semua kelas di teachers --}}
-    <div class="side-link p-2 ps-3 rounded-end-2 {{ Request::is('kelas*') ? 'active' : ''}}">
-        <a href="{{ route('classes-teachers') }}" class="text-decoration-none d-flex align-items-center text-dark">
-            <x-icon class="me-3" name="solar:notebook-bookmark-broken" width="28" height="28" />
-            Kelas Guru</a>
+    {{-- teacher link --}}
+    @if (auth()->user()->role == 'student')
+        <div class="side-link p-2 ps-3 rounded-end-2 {{ Request::is('classes*') ? 'active' : ''}}">
+            <a href="{{ route('classes') }}" class="text-decoration-none d-flex align-items-center text-dark">
+                <x-icon class="me-3" name="solar:notebook-bookmark-broken" width="28" height="28" />
+                Kelas
+            </a>
+        </div>
+        <div class="side-link p-2 ps-3 rounded-end-2 ">
+            <a href="{{ route('classes') }}" class="text-decoration-none d-flex align-items-center text-dark">
+                <x-icon class="me-3" name="solar:bell-broken" width="28" height="28" />
+                Pengingat
+            </a>
+        </div>
+    @endif
+
+    
+    {{-- Teachers link --}}
+    @if (auth()->user()->role == 'teacher')
+        <div class="side-link p-2 ps-3 rounded-end-2 {{ Request::is('classes-teachers*') ? 'active' : ''}}">
+            <a href="{{ route('classes-teachers') }}" class="text-decoration-none d-flex align-items-center text-dark">
+                <x-icon class="me-3" name="solar:notebook-bookmark-broken" width="28" height="28" />
+                Kelas Guru
+            </a>
+        </div>
+    @endif
+
+    <div class="side-link p-2 ps-3 rounded-end-2 {{ request()->is('profile*') ? 'active' : ''}}">
+        <a href="{{ route('profile.index') }}" class="text-decoration-none d-flex align-items-center text-dark">
+            <x-icon class="me-3" name="solar:settings-broken" width="28" height="28" />
+            Pengaturan
+        </a>
     </div>
 </div>

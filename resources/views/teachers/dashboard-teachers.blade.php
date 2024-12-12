@@ -7,7 +7,7 @@
    </div>
    <div class="banner px-5 rounded-5 d-flex justify-content-between align-items-center mb-3 shadow-sm">
       <div class="banner-text">
-         <h2 class="text-light">Sebarkan Ilmu Pengetahuan dengan Learnify.</h2>
+         <h2 class="text-light">Sebarkan Ilmu Pengetahuan dengan Learnify</h2>
          <p class="text-light">Dilengkapi dengan pengingat dan progress tracker untuk mendukung proses mengajarmu.</p>
       </div>
       <div class="banner-image">
