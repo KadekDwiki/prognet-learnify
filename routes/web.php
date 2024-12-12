@@ -37,6 +37,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile.index');
         Route::post('/profile/update', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
 
+
     });
     
 

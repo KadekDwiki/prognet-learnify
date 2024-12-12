@@ -14,71 +14,88 @@
     <div class="profile-form w-100 p-4">
         <div class="card shadow-sm">
             <div class="card-body">
-                <!-- Avatar Section -->
-                <div class="text-center mb-4">
-                    <div class="profile-avatar position-relative" style="display: inline-block;">
-                        <img src="https://via.placeholder.com/100" alt="Profile Picture" 
-                            class="rounded-circle border border-secondary" 
-                            style="width: 100px; height: 100px; object-fit: cover;">
-                        <button class="btn btn-light border rounded-circle position-absolute" 
-                            style="top: 70%; left: 70%; transform: translate(-50%, -50%);">
-                            <i class="bi bi-pencil"></i>
-                        </button>
+                <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
+                @csrf
+                    <!-- Avatar Section -->
+                    <div class="text-center mb-4">
+                        <div class="profile-avatar position-relative" style="display: inline-block;">
+                            <!-- Tampilkan foto profil yang sudah ada -->
+                            <img id="profileImage" src="{{ auth()->user()->profile_photo_path ? asset('storage/' . auth()->user()->profile_photo_path) : 'path/to/default/profile.png' }}" alt="Profile Picture" 
+                                class="rounded-circle border border-secondary" 
+                                style="width: 100px; height: 100px; object-fit: cover; overflow: hidden;"/>
+                            
+                            <!-- Input file tersembunyi untuk memilih foto -->
+                            <input type="file" name="profile_photo" id="profile_photo" style="display: none;" accept="image/*" onchange="previewImage(event)">
+                                
+                            <!-- Tombol Edit Foto Profil (Hanya Ikon) -->
+                            <label for="profile_photo" class="position-absolute" 
+                                style="top: 80%; left: 105%; transform: translate(-50%, -50%); cursor: pointer;">
+                                <x-icon class="text-primary" name="f7:pencil-circle" width="32" height="32"/>
+                            </label>
+                        </div>
                     </div>
-                </div>
+                        <!-- Nama Lengkap -->
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nama Lengkap</label>
+                            <input type="text" id="name" name="name" 
+                                class="form-control" 
+                                value="{{ old('name', $user->name) }}" 
+                                required style="padding: 10px; font-size: 14px;">
+                            @error('name')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
 
-                <!-- Form -->
-                <form method="POST" action="{{ route('profile.update') }}">
-                    @csrf
-                    @method('PUT')
+                        <!-- Email -->
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" id="email" name="email" 
+                                class="form-control" 
+                                value="{{ old('email', $user->email) }}" 
+                                required style="padding: 10px; font-size: 14px;">
+                            @error('email')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
 
-                    <!-- Nama Lengkap -->
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Nama Lengkap</label>
-                        <input type="text" id="name" name="name" 
-                            class="form-control" 
-                            value="{{ old('name', $user->name) }}" 
-                            required style="padding: 10px; font-size: 14px;">
-                        @error('name')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
+                        <!-- Nomor Telepon -->
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Nomor Telepon</label>
+                            <input type="text" id="phone" name="phone" 
+                                class="form-control" 
+                                value="{{ old('phone', $user->phone) }}" 
+                                style="padding: 10px; font-size: 14px;">
+                            @error('phone')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
 
-                    <!-- Email -->
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" id="email" name="email" 
-                            class="form-control" 
-                            value="{{ old('email', $user->email) }}" 
-                            required style="padding: 10px; font-size: 14px;">
-                        @error('email')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
-
-                    <!-- Nomor Telepon -->
-                    <div class="mb-3">
-                        <label for="phone" class="form-label">Nomor Telepon</label>
-                        <input type="text" id="phone" name="phone" 
-                            class="form-control" 
-                            value="{{ old('phone', $user->phone) }}" 
-                            style="padding: 10px; font-size: 14px;">
-                        @error('phone')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
-
-                    <!-- Submit Button -->
-                    <div class="text-center">
-                        <button type="submit" 
-                            class="btn btn-primary w-100" 
-                            style="padding: 10px; font-size: 16px;">
-                            Update
-                        </button>
-                    </div>
+                        <!-- Submit Button -->
+                        <div class="text-center">
+                            <button type="submit" 
+                                class="btn btn-primary w-100" 
+                                style="padding: 10px; font-size: 16px;">
+                                Update
+                            </button>
+                        </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    function previewImage(event) {
+        const file = event.target.files[0];
+        console.log(file); // Debugging: periksa file yang diupload
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                // Update tampilan foto profil pada halaman
+                document.getElementById('profileImage').src = e.target.result;
+            }
+            reader.readAsDataURL(file);
+        }
+    }
+</script>
 @endsection

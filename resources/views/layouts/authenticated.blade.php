@@ -32,7 +32,8 @@
                <img src="{{ asset("images/logo.png") }}" class="w-50 text-center" alt="">
             </div>
             <div class="side-profile d-flex flex-column align-items-center gap-2 mb-5">
-               <img src="{{ asset('images/profile.png') }}" class="w-50" alt="">
+            <img src="{{ auth()->user()->profile_photo_path ? asset('storage/' . auth()->user()->profile_photo_path) : asset('images/profile.png') }}" 
+            class="w-50 rounded-circle" alt="Foto Profil">
                <div class="text-center">
                   <p class="fw-bold mb-0 text-capitalize">{{ auth()->user()->name }}</p>
                   <small class="d-block text-break">{{ auth()->user()->email }}</small>
