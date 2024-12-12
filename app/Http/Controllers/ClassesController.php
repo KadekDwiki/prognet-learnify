@@ -104,7 +104,7 @@ class ClassesController extends Controller
     {
         $title = "Daftar Anggota Kelas";
         $lessonId = $id;
-        
+
         $class = Classes::findOrFail($id);
 
         $students = $class->students()->paginate(10);
@@ -181,13 +181,13 @@ class ClassesController extends Controller
 
     public function leaveClass(Request $request, $classId)
     {
-        $user = auth()->user(); 
-    
+        $user = auth()->user();
+
         DB::table('class_students')
             ->where('class_id', $classId)
             ->where('student_id', $user->id)
             ->delete();
-    
+
         return redirect()->route('classes')->with('success', 'Anda telah keluar dari kelas.');
     }
 

@@ -1,21 +1,30 @@
 @extends('layouts.authenticated')
 
 @section('content')
-   <div class="header mb-3">
-      <h4 class="text-primary text-capitalize">Selamat datang di kelas</h4>
-      <p class="text-light-emphasis">Ingin mengikuti kelas apa hari ini?</p>
-      <div class="d-flex align-items-center flex-column gap-3">
-         <div class="d-flex justify-content-center my-2 mx-3 ms-auto">
-            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#joinClassModal">Gabung Kelas</button>
-         </div>
+   <div class="header d-flex w-100 justify-content-between mb-3">
+      <div>
+         <h4 class="text-primary text-capitalize">Selamat datang di kelas</h4>
+         <p class="text-light-emphasis">Ingin mengikuti kelas apa hari ini?</p>
       </div>
-      
-         @if (session('success'))
-            <div class="alert alert-success">
-                  {{ session('success') }}
-            </div>
-         @endif
+      <div class="d-flex align-items-center flex-column gap-3">
+         <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#joinClassModal">Gabung Kelas</button>
+      </div>
    </div>
+
+   @if (session('success'))
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+         <strong>Berhasil</strong> {{ session('success') }}
+         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+   @endif
+
+   @if (session('error'))
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+         <strong>Gagal</strong> {{ session('error') }}
+         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+   @endif
+
    <div class="classes">
       <div class="class-cards gap-3">
          @foreach ($classes as $class)
