@@ -23,6 +23,7 @@ class User extends Authenticatable
         'role',
         'password',
         'telp',
+        'profile_photo_path'
     ];
 
     /**
@@ -52,5 +53,5 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Classes::class, 'class_students', 'student_id', 'class_id');
     }
-
 }
+        

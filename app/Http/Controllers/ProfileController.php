@@ -34,21 +34,18 @@ class ProfileController extends Controller
             'profile_photo' => 'nullable|image|mimes:jpg,jpeg,png,gif,bmp,tiff,webp|max:2048', // Menambahkan format gambar lainnya
         ]);
 
-        // Update data pengguna (nama, email, phone)
-        $user->update($validatedData);
-
         if ($request->hasFile('profile_photo')) {
             // Hapus foto lama jika ada
-            if ($user->profile_photo_path && Storage::exists($user->profile_photo_path)) {
-                Storage::delete($user->profile_photo_path);
+            if ($user->profile_photo_path && Storage::disk('public')->exists($user->profile_photo_path)) {
+                Storage::disk('public')->delete($user->profile_photo_path);
             }
-    
+        
             // Upload foto baru
-            $path = $request->file('profile_photo')->store('profile_photos', 'public');
-            \Log::info('Foto berhasil diupload ke path: ' . $path); // Logging untuk debug
-            $validatedData['profile_photo_path'] = $path;
+            $file = $request->file('profile_photo');
+            $originalFileName = $file->getClientOriginalName();
+            $filePath = $file->storeAs('uploads/profiles', $originalFileName, 'public');
+            $validatedData['profile_photo_path'] = $filePath;
         }
-    
         $user->update($validatedData);
     
         return redirect()->route('profile.index')->with('success', 'Profil berhasil diperbarui.');

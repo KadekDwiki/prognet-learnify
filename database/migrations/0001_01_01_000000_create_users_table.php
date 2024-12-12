@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('telp', length: 20);
             $table->enum('role', ['student', 'teacher'])->default('student');
-            table->string('profile_photo_path')->nullable();
+            $table->string('profile_photo_path')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
