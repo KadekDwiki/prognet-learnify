@@ -15,7 +15,7 @@
                 Kelas
             </a>
         </div>
-        <div class="side-link p-2 ps-3 rounded-end-2 {{ Request::is('*') ? 'active' : ''}}">
+        <div class="side-link p-2 ps-3 rounded-end-2 ">
             <a href="{{ route('classes') }}" class="text-decoration-none d-flex align-items-center text-dark">
                 <x-icon class="me-3" name="solar:bell-broken" width="28" height="28" />
                 Pengingat
