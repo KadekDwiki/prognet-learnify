@@ -20,11 +20,11 @@ class RegisterController extends Controller
         $validate = $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6'
+            'password' => 'required|min:6',
+            'telp' => 'required|max:15'
         ]);
 
         $validate['password'] = Hash::make($request->password);
-
         User::create($validate);
 
         return redirect(route('login'))->with('success', 'register berhasil');

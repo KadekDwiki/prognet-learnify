@@ -38,44 +38,43 @@
                      </a>
                   </div>
                </div>
-            @endforeach
-         </div>
 
-         <div class="modal fade" id="assignmentModal" tabindex="-1" aria-labelledby="assignmentModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <!-- Header -->
-                <div class="modal-header">
-                  <h5 class="modal-title" id="assignmentModalLabel">{{ Str::limit($assignment->title, 40, '...') }}</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <!-- Body -->
-                <div class="modal-body">
-                  <p>Tenggat: {{ \Carbon\Carbon::parse($assignment->due_date)->format('j M Y, H.i') }}</p>
-                  <div class="d-flex justify-content-around text-center border-top pt-3">
-                    <div>
-                      <h5 class="mb-0">0</h5>
-                      <small>Diserahkan</small>
-                    </div>
-                    <div>
-                      <h5 class="mb-0">1</h5>
-                      <small>Belum Dinilai</small>
-                    </div>
-                    <div>
-                      <h5 class="mb-0">0</h5>
-                      <small>Sudah Dinilai</small>
+               <div class="modal fade" id="assignmentModal" tabindex="-1" aria-labelledby="assignmentModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <!-- Header -->
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="assignmentModalLabel">{{ Str::limit($assignment->title, 40, '...') }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <!-- Body -->
+                      <div class="modal-body">
+                        <p>Tenggat: {{ \Carbon\Carbon::parse($assignment->due_date)->format('j M Y, H.i') }}</p>
+                        <div class="d-flex justify-content-around text-center border-top pt-3">
+                          <div>
+                            <h5 class="mb-0">0</h5>
+                            <small>Diserahkan</small>
+                          </div>
+                          <div>
+                            <h5 class="mb-0">1</h5>
+                            <small>Belum Dinilai</small>
+                          </div>
+                          <div>
+                            <h5 class="mb-0">0</h5>
+                            <small>Sudah Dinilai</small>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Footer -->
+                      <div class="modal-footer">
+                        <a href="" class="btn btn-link">Lihat detail</a>
+                        <button type="button" class="btn btn-primary">Tinjau Tugas</button>
+                      </div>
                     </div>
                   </div>
                 </div>
-                <!-- Footer -->
-                <div class="modal-footer">
-                  <a href="" class="btn btn-link">Lihat detail</a>
-                  <button type="button" class="btn btn-primary">Tinjau Tugas</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          
+            @endforeach
+         </div>
       </div>
    </div>
 @endsection

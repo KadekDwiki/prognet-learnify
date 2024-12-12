@@ -54,7 +54,7 @@ class DashboardController extends Controller
 
         // data for dashboard teacher
         $classesTeacher = Classes::join('users', 'classes.teacher_id', '=', 'users.id')
-            ->select('classes.id as class_id', 'classes.name as class_name', 'users.name as teacher_name')
+            ->select('classes.id as class_id', 'classes.name as class_name', 'users.name as teacher_name', 'classes.token as kode_kelas')
             ->where('classes.teacher_id', $userId)
             ->get();
 
