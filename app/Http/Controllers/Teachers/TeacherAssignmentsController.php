@@ -31,9 +31,13 @@ class TeacherAssignmentsController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(string $classId)
     {
-        //
+        //membuat tugas kelas
+        $title = "Buat Tugas";
+        $classId = $classId;
+
+        return view('teachers.assignments-teacher.create-assignments', compact('title','classId'));
     }
 
     /**
@@ -41,13 +45,25 @@ class TeacherAssignmentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //menyimpan tugas
+        $validated = $request->validate([
+            'judul' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string',
+            'tugaskan_ke' => 'required|string',
+            'poin' => 'required|integer',
+            'tenggat' => 'nullable|date',
+            'topik' => 'nullable|string',
+        ]);
+    
+        Assignments::create($validated);
+    
+        return redirect()->route('create-assignments.store')->with('success', 'Tugas berhasil dibuat!');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $classId)
     {
         // 
     }
@@ -55,17 +71,34 @@ class TeacherAssignmentsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $classId)
     {
-        //
+        // Cari tugas berdasarkan ID
+        $assignments = Assignments::findOrFail($classId);
+        $title = 'Edit Tugas';
+
+        return view('teachers.assignments-teacher.create-assignments', compact('assignments', 'title'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $classId)
     {
-        //
+        //Memperbarui tugas
+        $validated = $request->validate([
+            'judul' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string',
+            'tugaskan_ke' => 'required|string',
+            'poin' => 'required|integer',
+            'tenggat' => 'nullable|date',
+            'topik' => 'nullable|string',
+        ]);
+    
+        $assignments = Assignments::findOrFail($classId);
+        $assignments->update($validated);
+    
+        return redirect()->route('create-assignments.update', $classId)->with('success', 'Tugas berhasil diperbarui!');
     }
 
     /**
