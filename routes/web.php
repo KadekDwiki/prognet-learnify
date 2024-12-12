@@ -1,20 +1,14 @@
 <?php
 
-use App\Http\Controllers\Classes;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClassesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use App\Http\Controllers\Teachers\TeacherClassesController;
 use App\Http\Controllers\Teachers\TeacherLessonsController;
 use App\Http\Controllers\Teachers\TeacherAssignmentsController;
 use App\Http\Controllers\Teacher\TeacherAssignmentsController as TeacherTeacherAssignmentsController;
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
 Route::get('/', function () {
     return redirect('/dashboard');
