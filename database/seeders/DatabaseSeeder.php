@@ -19,23 +19,31 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::factory()->create([
-            'name' => 'student',
-            'email' => 'student@gmail.com',
-            'role' => 'student',
-            'password' => 'password'
-        ]);
-
-        User::factory()->create([
             'name' => 'teacher',
             'email' => 'teacher@gmail.com',
             'role' => 'teacher',
             'password' => 'password'
         ]);
 
-        Classes::factory(5)->create();
-        ClassStudents::factory(5)->create();
-        Lessons::factory(5)->create();
-        Assignments::factory(5)->create();
+        User::factory()->create([
+            'name' => 'dwiki teacher',
+            'email' => 'teacher1@gmail.com',
+            'role' => 'teacher',
+            'password' => 'password'
+        ]);
+
+        User::factory()->create([
+            'name' => 'student',
+            'email' => 'student@gmail.com',
+            'role' => 'student',
+            'password' => 'password'
+        ]);
+
+        User::factory(7)->create();
+        Classes::factory(10)->create();
+        ClassStudents::factory(10)->create();
+        Lessons::factory(20)->create();
+        Assignments::factory(10)->create();
         AssignmentsSubmissions::factory(5)->create();
     }
 }

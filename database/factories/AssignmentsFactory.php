@@ -20,7 +20,8 @@ class AssignmentsFactory extends Factory
             'title' => $this->faker->sentence(),
             'description' => $this->faker->paragraph(),
             'due_date' => $this->faker->dateTimeBetween('now', '+1 month'),
-            'class_id' => \App\Models\Classes::factory(),
+            'class_id' => $this->faker->numberBetween(1, 10),
+            'file_url' => $this->faker->optional->url()
         ];
     }
 }

@@ -17,10 +17,10 @@ class AssignmentsSubmissionsFactory extends Factory
     public function definition(): array
     {
         return [
-            'assignment_id' => \App\Models\Assignments::factory(),
-            'student_id' => \App\Models\User::factory()->create(['role' => 'student'])->id,
-            'submission_text' => $this->faker->optional()->paragraph(),
-            'file_url' => $this->faker->optional()->url(),
+            'assignment_id' => $this->faker->numberBetween(1, 10),
+            'student_id' => $this->faker->numberBetween(3, 10),
+            'submission_text' => $this->faker->paragraph(),
+            'file_url' => $this->faker->url(),
             'submitted_at' => $this->faker->dateTime(),
             'grade' => $this->faker->optional()->randomFloat(2, 0, 100),
         ];

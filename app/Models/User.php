@@ -22,7 +22,7 @@ class User extends Authenticatable
         'email',
         'role',
         'password',
-        'phone',
+        'telp',
     ];
 
     /**
@@ -47,4 +47,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function classes()
+    {
+        return $this->belongsToMany(Classes::class, 'class_students', 'student_id', 'class_id');
+    }
+
 }

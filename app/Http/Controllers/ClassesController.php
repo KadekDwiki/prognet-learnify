@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Classes;
+use App\Models\Lessons;
+use App\Models\Assignments;
+use App\Models\AssignmentsSubmissions;
 use Illuminate\Http\Request;
 use App\Models\ClassStudents;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 
 class ClassesController extends Controller
 {
@@ -41,26 +46,149 @@ class ClassesController extends Controller
         //
     }
 
+    public function joinClass(Request $request)
+    {
+        // Validasi input
+        $request->validate([
+            'classCode' => 'required|string|max:255',
+        ]);
+
+        // Ambil kode kelas dari input
+        $classCode = $request->input('classCode');
+        $user = auth()->user();
+
+        // Cari kelas berdasarkan token (kode kelas)
+        $class = Classes::where('token', $classCode)->first();
+
+        // Jika kelas tidak ditemukan
+        if (!$class) {
+            return redirect()->back()->with('error', 'Kode kelas tidak valid.');
+        }
+
+        // Cek apakah siswa sudah tergabung di kelas ini
+        $existingStudent = DB::table('class_students')
+            ->where('class_id', $class->id)
+            ->where('student_id', $user->id)
+            ->first();
+
+        // Jika sudah tergabung, tampilkan pesan error
+        if ($existingStudent) {
+            return redirect()->back()->with('error', 'Anda sudah tergabung di kelas ini.');
+        }
+
+        // Masukkan siswa ke dalam kelas
+        DB::table('class_students')->insert([
+            'class_id' => $class->id,
+            'student_id' => $user->id,
+            'joined_at' => now(),
+        ]);
+
+        // Berikan pesan sukses
+        return redirect()->route('classes')->with('success', 'Anda berhasil bergabung ke kelas!');
+    }
+
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function lessons(string $id)
     {
-        $title = "Detail Kelas";
+        $title = "Daftar Topik";
         $lessonId = $id;
-        $class = Classes::with('lessons')->find($id);
-        $lessons = $class->lessons;
+        $classes = Classes::with('lessons')->find($id);
+        $lessons = $classes->lessons;
 
-        return view('students.lessons_class', compact('title', 'lessons', 'lessonId'));
+        return view('students.lessons.lessons_class', compact('title', 'lessons', 'lessonId'));
+    }
+
+    public function showMembers($id)
+    {
+        $title = "Daftar Anggota Kelas";
+        $lessonId = $id;
+
+        $class = Classes::findOrFail($id);
+
+        $students = $class->students()->paginate(10);
+
+        return view('students.members', compact('title', 'lessonId', 'students', 'class'));
+    }
+
+    public function lessonDetail(string $classId, string $lessonId)
+    {
+        $title = "Detail Topik";
+        $classId = $classId;
+        $lessonId = $lessonId;
+        $topics = Lessons::find($lessonId);
+
+        return view('students.lessons.lesson_detail', compact('title', 'topics', 'classId', 'lessonId'));
+    }
+
+    public function assignments(string $id)
+    {
+        $title = "Daftar Tugas";
+        $lessonId = $id;
+        $classes = Classes::with('assignments')->find($id);
+        $assignments = $classes->assignments;
+
+        return view('students.assignments.assignments_class', compact('title', 'assignments', 'lessonId'));
+    }
+
+    public function assignmentDetail(string $classId, string $assignmentId)
+    {
+        $title = "Detail Topik";
+        $classId = $classId;
+        $assignmentId = $assignmentId;
+        $assignment = Assignments::find($assignmentId);
+
+        $submission = AssignmentsSubmissions::where('assignment_id', $assignmentId)
+            ->where('student_id', Auth::user()->id)
+            ->first();
+
+        return view('students.assignments.assignment_detail', compact('title', 'assignment', 'classId', 'assignmentId', 'submission'));
+    }
+
+    public function handleStudentSubmission(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|file|mimes:jpg,png,pdf,docx|max:1048',
+        ]);
+
+        $file = $request->file('file');
+        $originalFileName = $file->getClientOriginalName();
+        $filePath = $file->storeAs('uploads/student-submissions', $originalFileName, 'public');
+
+        $validate = [
+            'file_url' => $filePath,
+            'assignment_id' => $request->assignment_id,
+            'student_id' => Auth::user()->id,
+            'submitted_at' => now()
+        ];
+
+        // Create a new submission record
+        AssignmentsSubmissions::create($validate);
+
+        // Redirect with a success message
+        return redirect()->back()->with('success', 'Tugas berhasil di serahkan');
     }
 
     public function setting(string $id)
     {
         $title = "Setting";
         $lessonId = $id;
-        $user = auth()->user();
+        $user = Auth::user();
 
         return view('profile.profile', compact('title', 'lessonId', 'user'));
+    }
+
+    public function leaveClass(Request $request, $classId)
+    {
+        $user = auth()->user();
+
+        DB::table('class_students')
+            ->where('class_id', $classId)
+            ->where('student_id', $user->id)
+            ->delete();
+
+        return redirect()->route('classes')->with('success', 'Anda telah keluar dari kelas.');
     }
 
     /**
