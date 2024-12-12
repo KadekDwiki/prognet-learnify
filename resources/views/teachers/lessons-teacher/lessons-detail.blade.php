@@ -15,9 +15,9 @@
                </div>
 
                @if (!empty($topics->file_url))
-                  <div class="d-flex align-items-center bg-body-secondary bg-opacity-50 shadow-sm p-3 rounded-3">
+                  <div class="d-flex align-items-center bg-opacity-10 shadow-sm p-3 border rounded-3" style="background-color: #B2DAFF30">
                      <div class="card-icon me-3">
-                        <x-icon class="text-primary" name="akar-icons:file" height="44" width="44" />
+                        <img src="{{ asset('images/pdf-image.png') }}" alt="PDF Icon" class="me-3" style="width: 30px; height: auto;">
                      </div>
                         <div class="card-desc">
                            <a href="{{ $topics->file_url }}" class="text-dark text-decoration-none" target="_blank">
@@ -26,26 +26,6 @@
                         </div>
                   </div>
                @endif
-
-               <div class="container mt-3">
-                  <ul class="list-group">
-                     <li class="list-group-item d-flex align-items-center">
-                        <img src="{{ asset('images/pdf-image.png') }}" alt="PDF Icon" class="me-3" style="width: 30px; height: auto;">
-                        <div>
-                           <strong>Materi.pdf</strong>
-                           <p class="mb-0 text-muted">10 Halaman</p>
-                        </div>
-                     </li>
-                     
-                     <li class="list-group-item d-flex align-items-center mt-3">
-                        <img src="{{ asset('images/file-image.png') }}" alt="DOC Icon" class="me-3" style="width: 30px; height: auto;">
-                        <div>
-                           <strong>Materi 2.docs</strong>
-                           <p class="mb-0 text-muted">3 Halaman</p>
-                        </div>
-                     </li>
-               </ul>
-            </div>
             
          </div>
       </div>

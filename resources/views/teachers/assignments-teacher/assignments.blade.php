@@ -18,14 +18,13 @@
 
          <div class="row w-100 mt-4 gap-4">
             @foreach ($assignments as $assignment) 
-            <div class="card-lessons d-flex p-3 w-100 justify-content-between align-items-center bg-body-secondary rounded-2 shadow-sm">
+            <div class="card-lessons d-flex p-3 w-100 justify-content-between align-items-center rounded-2 shadow-sm" style="background-color: #B2DAFF30">
                   <div class="icon">
                      <x-icon class="me-3 text-primary" name="hugeicons:task-01" width="48" height="48" />
                   </div>
                   <div class="deadline w-75">
                      <h5>{{ Str::limit($assignment->title, 40, '...') }}</h5>
-                     {{-- <p class="mb-0">{{ Str::limit($assignment->content, 40, '...') }}</p> --}}
-                     <p class="border-bottom mb-0">{{ $assignment->created_at->diffForHumans() }}</p>
+                     <p class="mb-0">{{ $assignment->created_at->diffForHumans() }}</p>
                   </div>
                   <div class="action">
                      <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#assignmentModal">

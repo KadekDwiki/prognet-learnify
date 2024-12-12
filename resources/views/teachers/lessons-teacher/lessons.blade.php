@@ -8,7 +8,7 @@
             <div class="progress-bar" style="width: 25%">25%</div>
          </div>
          <div class="add-lesson w-100 d-flex justify-content-end">
-            <a href="{{route('add-lessons', $classId)}}" class="btn btn-primary">
+            <a href="{{route('add-lessons', $lessonId)}}" class="btn btn-primary">
                <x-icon class="" name="ic:round-plus" width="28" height="28" />
                Tambah Materi
             </a>
@@ -16,7 +16,7 @@
          
          <div class="row w-100 gap-4">
             @foreach ($lessons as $lesson) 
-               <div class="card-lessons d-flex p-3 w-100 justify-content-between align-items-center bg-body-secondary rounded-2 shadow-sm">
+               <div class="card-lessons d-flex p-3 w-100 justify-content-between align-items-center rounded-2 shadow-sm" style="background-color: #B2DAFF30">
                   <div class="icon">
                      <x-icon class="me-3 text-primary" name="solar:notebook-broken" width="48" height="48" />
                   </div>
