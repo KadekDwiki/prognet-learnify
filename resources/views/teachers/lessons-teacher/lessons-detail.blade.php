@@ -29,24 +29,24 @@
 
                <div class="container mt-3">
                   <ul class="list-group">
-                      <li class="list-group-item d-flex align-items-center">
-                          <img src="{{ asset('images/pdf-image.png') }}" alt="PDF Icon" class="me-3" style="width: 30px; height: auto;">
-                          <div>
-                              <strong>Materi.pdf</strong>
-                              <p class="mb-0 text-muted">10 Halaman</p>
-                          </div>
-                      </li>
-              
-                      <li class="list-group-item d-flex align-items-center mt-3">
-                          <img src="{{ asset('images/file-image.png') }}" alt="DOC Icon" class="me-3" style="width: 30px; height: auto;">
-                          <div>
-                              <strong>Materi 2.docs</strong>
-                              <p class="mb-0 text-muted">3 Halaman</p>
-                          </div>
-                      </li>
-                  </ul>
-              </div>
-              
+                     <li class="list-group-item d-flex align-items-center">
+                        <img src="{{ asset('images/pdf-image.png') }}" alt="PDF Icon" class="me-3" style="width: 30px; height: auto;">
+                        <div>
+                           <strong>Materi.pdf</strong>
+                           <p class="mb-0 text-muted">10 Halaman</p>
+                        </div>
+                     </li>
+                     
+                     <li class="list-group-item d-flex align-items-center mt-3">
+                        <img src="{{ asset('images/file-image.png') }}" alt="DOC Icon" class="me-3" style="width: 30px; height: auto;">
+                        <div>
+                           <strong>Materi 2.docs</strong>
+                           <p class="mb-0 text-muted">3 Halaman</p>
+                        </div>
+                     </li>
+               </ul>
+            </div>
+            
          </div>
       </div>
    </div>

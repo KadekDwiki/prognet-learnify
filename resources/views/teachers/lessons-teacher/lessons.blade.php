@@ -8,8 +8,8 @@
             <div class="progress-bar" style="width: 25%">25%</div>
          </div>
          <div class="add-lesson w-100 d-flex justify-content-end">
-            <a href="{{route('add-lessons', $lessonId)}}" class="btn btn-primary">
-               <x-icon class="" name="ic:round-plus" width="20" height="20" />
+            <a href="{{route('add-lessons', $classId)}}" class="btn btn-primary">
+               <x-icon class="" name="ic:round-plus" width="28" height="28" />
                Tambah Materi
             </a>
          </div>
