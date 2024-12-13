@@ -13,7 +13,6 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        \Log::info('User ID: ' . auth()->id());
         $title = 'Profile';
         $user = auth()->user(); // Ambil data pengguna yang sedang login
         return view('profile.profile', compact('user', 'title')); // Pastikan file `profile.blade.php` ada di folder views/profile

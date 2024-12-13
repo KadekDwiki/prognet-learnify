@@ -21,7 +21,7 @@
    </div>
 
    @if (auth()->user()->role == 'student')
-      <div class="banner px-5 rounded-5 d-flex justify-content-between align-items-center mb-3 shadow-sm">
+      <div class="banner banner-dashboard px-5 rounded-5 d-flex justify-content-between align-items-center mb-3 shadow-sm">
          <div class="banner-text">
             <h2 class="text-light">Jelajahi Dunia Ilmu Pengetahuan dengan Learnify.</h2>
             <p class="text-light">Dilengkapi dengan pengingat dan proses tracker untuk mendukung belajarmu.</p>
@@ -73,7 +73,7 @@
 
    {{-- teacher --}}
    @if (auth()->user()->role == 'teacher')
-      <div class="banner px-5 rounded-5 d-flex justify-content-between align-items-center mb-3 shadow-sm">
+      <div class="banner banner-dashboard px-5 rounded-5 d-flex justify-content-between align-items-center mb-3 shadow-sm">
          <div class="banner-text">
             <h2 class="text-light">Sebarkan Ilmu Pengetahuan dengan Learnify.</h2>
             <p class="text-light">Dilengkapi dengan pengingat dan progress tracker untuk mendukung proses mengajarmu.</p>

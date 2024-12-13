@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Teachers\TeacherClassesController;
 use App\Http\Controllers\Teachers\TeacherLessonsController;
 use App\Http\Controllers\Teachers\TeacherAssignmentsController;
+use App\Http\Controllers\ReminderController;
 
 Route::get('/', function () {
     return redirect('/dashboard');
@@ -44,6 +45,8 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/members/{id}', [ClassesController::class, 'showMembers'])->name('classes.members');
         Route::post('/classes/{class}/leave', [ClassesController::class, 'leaveClass'])->name('classes.leave');
+
+        Route::get('/reminder', [ReminderController::class, 'index'])->name('reminder');
     });
 
     Route::middleware(['role:teacher'])->group(function () {

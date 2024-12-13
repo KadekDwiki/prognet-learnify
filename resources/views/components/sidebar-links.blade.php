@@ -7,7 +7,7 @@
         </a>
     </div>
 
-    {{-- teacher link --}}
+    {{-- student link --}}
     @if (auth()->user()->role == 'student')
         <div class="side-link p-2 ps-3 rounded-end-2 {{ Request::is('classes*') ? 'active' : ''}}">
             <a href="{{ route('classes') }}" class="text-decoration-none d-flex align-items-center text-dark">
@@ -15,8 +15,8 @@
                 Kelas
             </a>
         </div>
-        <div class="side-link p-2 ps-3 rounded-end-2 ">
-            <a href="{{ route('classes') }}" class="text-decoration-none d-flex align-items-center text-dark">
+        <div class="side-link p-2 ps-3 rounded-end-2 {{ Request::is('reminder*') ? 'active' : ''}}">
+            <a href="{{ route('reminder') }}" class="text-decoration-none d-flex align-items-center text-dark">
                 <x-icon class="me-3" name="solar:bell-broken" width="28" height="28" />
                 Pengingat
             </a>
