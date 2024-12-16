@@ -9,7 +9,7 @@
          </div>
 
          <div class="add-lesson w-100 d-flex justify-content-end">
-            <a href="{{"/assignments/create/$classId"}}" class="btn btn-primary">
+            <a href="{{ "/assignments-create/$classId" }}" class="btn btn-primary">
                  
                <x-icon class="" name="ic:round-plus" width="20" height="20" />
                Tambah Tugas

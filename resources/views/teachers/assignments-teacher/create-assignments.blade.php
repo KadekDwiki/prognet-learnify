@@ -8,7 +8,7 @@
 
         </div>
         <div class="card-body">
-            <form method="POST" action="{{ isset($assignments) ? route('tcreate-assignments.store', $assignments->id) : route('create-assignments.update') }}">
+            <form method="POST" action="{{ route('assignments.store') }}">
                 @csrf
 
                 <div class="mt-4 mb-3">
@@ -35,39 +35,39 @@
                 <div class="form-group mb-3 d-flex align-items-center">
                     <div class="me-3">
                         <button type="button" onclick="openGoogleDrive()">
-                            <x-icon name="logos:google-drive" width="32" height="32" />
+                            <x-icon class="" name="logos:google-drive" width="32" height="32" />
                         </button>
                     </div>
                     <div class="me-3">
                         <button type="button" onclick="openYouTube()">
-                            <x-icon name="logos:youtube-icon" width="32" height="32" />
+                            <x-icon class="" name="logos:youtube-icon" width="32" height="32" />
                         </button>
                     </div>
                     <div class="me-3">
                         <button type="button" onclick="addToClipboard()">
-                            <x-icon name="solar:clipboard-add-broken" width="32" height="32" />
+                            <x-icon class="" name="solar:clipboard-add-broken" width="32" height="32" />
                         </button>
                     </div>
                     <div class="me-3">
                         <button type="button" onclick="uploadFile()">
-                            <x-icon name="solar:upload-minimalistic-bold" width="32" height="32" />
+                            <x-icon class="" name="solar:upload-minimalistic-bold" width="32" height="32" />
                         </button>
                     </div>
                     <div class="me-3">
                         <button type="button" onclick="addLink()">
-                            <x-icon name="material-symbols:link" width="32" height="32" />
+                            <x-icon class="" name="material-symbols:link" width="32" height="32" />
                         </button>
                     </div>
                 </div>
 
 
-                <div class="form-group mb-3">
+                {{-- <div class="form-group mb-3">
                     <label for="tugaskan_ke">Tugaskan ke</label>
                     <select class="form-control" id="tugaskan_ke" name="tugaskan_ke">
                         <option value="semua_siswa" {{ old('tugaskan_ke', $tugas->tugaskan_ke ?? '') === 'semua_siswa' ? 'selected' : '' }}>Semua siswa</option>
                         <!-- Tambahkan opsi lainnya jika perlu -->
                     </select>
-                </div>
+                </div> --}}
 
                 <div class="form-group mb-3">
                     <label for="poin">Poin</label>
@@ -86,6 +86,12 @@
                     <label for="topik">Topik</label>
                     <select class="form-control" id="topik" name="topik">
                         <option value="" {{ old('topik', $tugas->topik ?? '') === '' ? 'selected' : '' }}>Tidak ada topik</option>
+                    
+                        @foreach($topic as $t)
+                            <option value="{{ $t->topic}}" {{old('topic') === $t->topic ? 'selected' : ''}}>
+                                {{ $t->topic}}
+                            </option>
+                        @endforeach
                     </select>
                 </div>
 

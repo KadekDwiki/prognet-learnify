@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Teachers;
 use App\Models\Assignments;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Lessons;
 
 class TeacherAssignmentsController extends Controller
 {
@@ -36,8 +37,11 @@ class TeacherAssignmentsController extends Controller
         //membuat tugas kelas
         $title = "Buat Tugas";
         $classId = $classId;
+        $topic = Lessons::select('title as topic')
+            ->where('class_id', $classId)
+            ->get();
 
-        return view('teachers.assignments-teacher.create-assignments', compact('title','classId'));
+        return view('teachers.assignments-teacher.create-assignments', compact('title','classId','topic'));
     }
 
     /**
