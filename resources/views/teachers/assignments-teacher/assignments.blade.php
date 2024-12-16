@@ -4,19 +4,23 @@
    <x-navbar-classes :lessonId="$classId"/>
    <div class="content-classes d-flex justify-content-center w-100">
       <div class="d-flex w-75 align-items-center flex-column gap-3">
+         @if (session('success'))
+            <div class="alert w-100 alert-success alert-dismissible fade show" role="alert">
+               <strong>Berhasil!</strong> {{session('success')}}
+               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+         @endif
          <div class="progress w-100" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
             <div class="progress-bar" style="width: 25%">25%</div>
          </div>
-
          <div class="add-lesson w-100 d-flex justify-content-end">
             <a href="{{ "/assignments-create/$classId" }}" class="btn btn-primary">
-                 
-               <x-icon class="" name="ic:round-plus" width="20" height="20" />
+               <x-icon class="" name="ic:round-plus" width="28" height="28" />
                Tambah Tugas
             </a>
          </div>
 
-         <div class="row w-100 mt-4 gap-4">
+         <div class="row w-100 gap-4">
             @foreach ($assignments as $assignment) 
             <div class="card-lessons d-flex p-3 w-100 justify-content-between align-items-center rounded-2 shadow-sm" style="background-color: #B2DAFF30">
                   <div class="icon">
@@ -67,7 +71,7 @@
                       </div>
                       <!-- Footer -->
                       <div class="modal-footer">
-                        <a href="" class="btn btn-link">Lihat detail</a>
+                        <a href="{{ url('/assignments/' . $classId . '/' . $assignment->id) }}"  class="btn btn-link">Lihat detail</a>
                         <button type="button" class="btn btn-primary">Tinjau Tugas</button>
                       </div>
                     </div>

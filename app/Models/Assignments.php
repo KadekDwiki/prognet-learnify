@@ -12,6 +12,8 @@ class Assignments extends Model
     protected $fillable = [
         'title',
         'description',
+        'topic',
+        'file_url',
         'due_date',
         'class_id'
     ];

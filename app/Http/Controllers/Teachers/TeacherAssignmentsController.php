@@ -51,17 +51,24 @@ class TeacherAssignmentsController extends Controller
     {
         //menyimpan tugas
         $validated = $request->validate([
-            'judul' => 'required|string|max:255',
-            'deskripsi' => 'nullable|string',
-            'tugaskan_ke' => 'required|string',
-            'poin' => 'required|integer',
-            'tenggat' => 'nullable|date',
-            'topik' => 'nullable|string',
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'due_date' => 'nullable|date',
+            'topic' => 'required|string',
+            'file' => 'required|file|mimes:jpg,png,pdf,docx|max:1048',
         ]);
-    
+
+        $file = $request->file('file');
+        $originalFileName = $file->getClientOriginalName();
+        $filePath = $file->storeAs('uploads/teachers-submissions', $originalFileName, 'public');
+
+        $validated['file_url'] = $filePath;
+        $validated['class_id'] = $request->class_id;
+        
+        // dd($validated);
         Assignments::create($validated);
     
-        return redirect()->route('create-assignments.store')->with('success', 'Tugas berhasil dibuat!');
+        return redirect()->route('assignments.index', $request->class_id)->with('success', 'Tugas berhasil dibuat!');
     }
 
     /**
@@ -111,5 +118,15 @@ class TeacherAssignmentsController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function showDetail(string $classId, string $assignmentId)
+    {
+    // Cari tugas berdasarkan ID
+    $topics = Assignments::findOrFail($assignmentId);
+    $title = 'Detail Tugas';
+
+    // Menampilkan view detail tugas
+    return view('teachers.assignments-teacher.detail-assignments', compact('topics', 'title', 'classId'));
     }
 }
