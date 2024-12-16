@@ -60,6 +60,9 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/assignments/update/{classId}', [TeacherAssignmentsController::class, 'update'])->name('assignments.update');
         Route::get('/assignments/{classId}/{assignmentId}', [TeacherAssignmentsController::class, 'showDetail'])->name('assignments.showDetail');
 
+        Route::get('/members-teachers/{id}', [TeacherClassesController::class, 'showMembers'])->name('classes.members-teachers');
+        Route::post('/delete-members/{student_id}', [TeacherClassesController::class, 'destroy'])->name('members-teachers.destroy');
+
     });
 
 });
