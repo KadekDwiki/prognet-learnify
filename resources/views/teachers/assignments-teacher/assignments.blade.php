@@ -9,8 +9,8 @@
          </div>
 
          <div class="add-lesson w-100 d-flex justify-content-end">
-            <a href="" class="btn btn-primary">
-                {{-- {{route('add-assignment', $classId)}} --}}
+            <a href="{{ "/assignments-create/$classId" }}" class="btn btn-primary">
+                 
                <x-icon class="" name="ic:round-plus" width="20" height="20" />
                Tambah Tugas
             </a>
