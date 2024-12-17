@@ -57,5 +57,16 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/add-lessons/{classId}', [TeacherLessonsController::class, 'create'])->name('add-lessons');
 
         Route::get('/assignments-teachers/{classId}', [TeacherAssignmentsController::class, 'index'])->name('assignments.index');
+        Route::get('/assignments-create/{classId}', [TeacherAssignmentsController::class, 'create'])->name('assignments.create');
+        Route::post('/assignments/store', [TeacherAssignmentsController::class, 'store'])->name('assignments.store');
+        Route::get('/assignments/edit/{classId}', [TeacherAssignmentsController::class, 'edit'])->name('assignments.edit');
+        Route::put('/assignments/update/{classId}', [TeacherAssignmentsController::class, 'update'])->name('assignments.update');
+        Route::get('/assignments/{classId}/{assignmentId}', [TeacherAssignmentsController::class, 'showDetail'])->name('assignments.showDetail');
+
+        Route::get('/members-teachers/{id}', [TeacherClassesController::class, 'showMembers'])->name('classes.members-teachers');
+        Route::post('/delete-members/{student_id}', [TeacherClassesController::class, 'destroy'])->name('members-teachers.destroy');
+        Route::post('/grades/{classId}', [TeacherClassesController::class, 'showGrade'])->name('members-grade.show-grade');
+
     });
+
 });

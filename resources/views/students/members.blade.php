@@ -7,6 +7,11 @@
 
         <button type="button" class="btn btn-outline-danger ms-auto" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Keluar</button>
             
+        <div class="text-bg-info p-3 shadow-sm rounded-5">
+            <p class="m-0">Guru:</p>
+            <p class="m-0"> {{ $teacherName }}</p>
+        </div>
+        
             <table class="table border">
                 <thead>
                     <tr>

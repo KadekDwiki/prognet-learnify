@@ -19,6 +19,7 @@ class AssignmentsFactory extends Factory
         return [
             'title' => $this->faker->sentence(),
             'description' => $this->faker->paragraph(),
+            'topic' => $this->faker->paragraph(),
             'due_date' => $this->faker->dateTimeBetween('now', '+1 month'),
             'class_id' => $this->faker->numberBetween(1, 10),
             'file_url' => $this->faker->optional->url()

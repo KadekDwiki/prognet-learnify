@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Teachers;
 
 use App\Models\Classes;
 use Illuminate\Http\Request;
+use App\Models\ClassStudents;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,6 +23,22 @@ class TeacherClassesController extends Controller
             ->get();
 
         return view('teachers.classes-teachers', compact('title', 'classes'));
+    }
+
+    public function showMembers($id)
+    {
+        $title = "Daftar Anggota Kelas";
+        $lessonId = $id;
+
+        $class = Classes::findOrFail($id);
+
+        // $teachers = $class->teacher();
+        $teacherName = $class->teacher->name;
+        $students = $class->students()->paginate(10);
+        // dd($students);
+
+
+        return view('teachers.members-teachers', compact('title', 'lessonId', 'students', 'class','teacherName'));
     }
     /**
      * Show the form for creating a new resource.
@@ -59,11 +76,22 @@ class TeacherClassesController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy($student_id)
     {
-        //
+     // Cari siswa di tabel class_students atau relasi lain yang sesuai
+    $classStudent = ClassStudents::where('student_id', $student_id)->first();
+
+    if ($classStudent) {
+        // Hapus siswa dari kelas
+        $classStudent->delete();
+        return redirect()->back()->with('success', 'Siswa berhasil dihapus dari kelas.');
+    }
+
+    return redirect()->back()->with('error', 'Siswa tidak ditemukan.');
+    }
+
+    public function showGrade()
+    {
+        
     }
 }
