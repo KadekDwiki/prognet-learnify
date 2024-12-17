@@ -89,4 +89,9 @@ class TeacherClassesController extends Controller
 
     return redirect()->back()->with('error', 'Siswa tidak ditemukan.');
     }
+
+    public function showGrade()
+    {
+        
+    }
 }
