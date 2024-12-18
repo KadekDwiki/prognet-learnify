@@ -109,6 +109,41 @@
             joinButton.disabled = classCode.trim() === '';
          });
       </script>
+   @endif
 
+   {{-- teacher --}}
+   @if (auth()->user()->role == 'teacher')
+      <div class="banner px-5 rounded-5 d-flex justify-content-between align-items-center mb-3 shadow-sm">
+         <div class="banner-text">
+            <h2 class="text-light">Sebarkan Ilmu Pengetahuan dengan Learnify.</h2>
+            <p class="text-light">Dilengkapi dengan pengingat dan progress tracker untuk mendukung proses mengajarmu.</p>
+         </div>
+         <div class="banner-image">
+            <img src="{{ asset('images\dashboard-teachers.png') }}" alt="">
+         </div>
+      </div>
+
+      <div class="classes">
+         <div class="d-flex justify-content-between">
+            <h5 class="text-primary mb-3">Kelasmu ({{ $classCountTeacher }})</h5>
+            <a href="{{ route('classes-teachers') }}" class="link-offset-2">Lihat Semua</a>
+         </div>
+         
+         @if(count($classesTeacher) > 0)
+            <div class="class-cards gap-3">
+               @foreach ($classesTeacher as $class)
+                  <x-card-class :classId="$class->class_id" :name="$class->class_name" :teacher="$class->teacher_name" task="10" progress="20" />
+               @endforeach
+            </div>
+         @else
+            <div class="empty-classes">
+               <div class="d-flex justify-content-center align-items-center flex-column">
+                  <img src="{{ asset('images/rainy-face.png') }}" alt="">
+                  <p>Yahh, kamu belum ada kelas</p>
+                  <a href="" class="btn btn-primary rounded-pill px-4">Buat Kelas</a>
+               </div>
+            </div>
+         @endif
+      </div>
    @endif
 @endsection
