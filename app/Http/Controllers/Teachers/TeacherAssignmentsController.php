@@ -146,8 +146,8 @@ class TeacherAssignmentsController extends Controller
      */
     public function destroy($id)
     {
-        $lesson = Assignments::findOrFail($id);
-        $lesson->delete();
+        $assignments = Assignments::findOrFail($id);
+        $assignments->delete();
 
         return redirect()->back()->with('success', 'Tugas berhasil dihapus.');
     }

@@ -38,9 +38,35 @@
                      <a href="{{ route('assignments.edit', $assignment->id) }}" class="btn btn-sm btn-warning">
                         <x-icon class="text-white" name="solar:pen-broken" width="28" height="28" />
                      </a>
-                     <a href="" class="btn btn-sm btn-danger">
+                     <a href="#" class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                                data-bs-target="#deleteModal{{ $assignment->id }}">
                         <x-icon class="" name="solar:trash-bin-2-broken" width="28" height="28" />
                      </a>
+                     <div class="modal fade" id="deleteModal{{ $assignment->id }}" tabindex="-1"
+                        aria-labelledby="deleteModalLabel{{ $assignment->id }}" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="deleteModalLabel{{ $assignment->id }}">Konfirmasi
+                                        Penghapusan</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Apakah Anda yakin ingin menghapus tugas ini?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Batal</button>
+                                    <form action="{{ route('assignments.destroy', $assignment->id) }}"
+                                        method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">Hapus</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                   </div>
             </div>
 
