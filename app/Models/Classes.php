@@ -13,6 +13,7 @@ class Classes extends Model
     protected $fillable = [
         'name',
         'description',
+        'subject',
         'teacher_id'
     ];
 
