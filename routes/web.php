@@ -51,6 +51,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::middleware(['role:teacher'])->group(function () {
         Route::get('/classes-teachers', [TeacherClassesController::class, 'index'])->name('classes-teachers');
+        Route::post('/classes/store', [TeacherClassesController::class, 'store'])->name('classes.store');
 
         Route::get('/lessons-teachers/{id}', [TeacherLessonsController::class, 'index'])->name('classes.lessons-teachers');
         Route::get('/lessons-teachers/{classId}/{lessonsId}', [TeacherLessonsController::class, 'show'])->name('lessons.detail');

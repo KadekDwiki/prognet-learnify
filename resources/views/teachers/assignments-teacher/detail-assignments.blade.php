@@ -6,18 +6,17 @@
       <div class="d-flex w-75 align-items-center flex-column gap-3">
          <div class="row w-100 mt-4 gap-4">
             
-            <div class="description border rounded-3 p-4 shadow-sm" style="background-color: #FFFFFF">
-               <h5 class="text-primary fw-bold">
-                  <i class="bi bi-clipboard-check me-2"></i> <!-- Icon -->
+            <div class="description">
+               <h3 class="text-primary">
                   {{ $topics->title }}
-               </h5>
-               <p class="text-muted small">
-                  Nama guru • {{ $topics->created_at->format('d M Y') }}
-               </p>
+               </h3>
                <p class="fw-light small text-secondary mb-3">
                   100 poin • <span class="text-primary fw-semibold">tenggat: 20 Jan</span>
                </p>
-               <p>{{ $topics->content }}</p>
+               <p class="border-bottom pb-4">{{ $topics->created_at->diffForHumans() }}</p>
+               <p>
+                  {{ $topics->content }}
+               </p>
             </div>
 
             @if (!empty($topics->file_url))
