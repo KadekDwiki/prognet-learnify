@@ -107,9 +107,10 @@ class ClassesController extends Controller
 
         $class = Classes::findOrFail($id);
 
+        $teacher = $class->teacher;
         $students = $class->students()->paginate(10);
 
-        return view('students.members', compact('title', 'lessonId', 'students', 'class'));
+        return view('students.members', compact('title', 'lessonId', 'students', 'class', 'teacher'));
     }
 
     public function lessonDetail(string $classId, string $lessonId)
