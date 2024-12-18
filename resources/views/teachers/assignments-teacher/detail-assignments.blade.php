@@ -5,7 +5,6 @@
    <div class="content-classes d-flex justify-content-center w-100">
       <div class="d-flex w-75 align-items-center flex-column gap-3">
          <div class="row w-100 mt-4 gap-4">
-            
             <div class="description">
                <h3 class="text-primary">
                   {{ $topics->title }}
@@ -15,7 +14,7 @@
                </p>
                <p class="border-bottom pb-4">{{ $topics->created_at->diffForHumans() }}</p>
                <p>
-                  {{ $topics->content }}
+                  {{ $topics->description }}
                </p>
             </div>
 
@@ -28,6 +27,9 @@
                            <a href="{{ $topics->file_url }}" class="text-dark text-decoration-none" target="_blank">
                               {{ Str::limit($topics->file_url, 70, '...') }}
                            </a>
+                           <a data-fancybox data-type="iframe" href="{{ asset("storage/$topics->file_url") }}">
+                              Lihat tugas
+                           </a> 
                         </div>
                   </div>
             @endif

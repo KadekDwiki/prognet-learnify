@@ -60,8 +60,7 @@ class TeacherClassesController extends Controller
         // Validasi input
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'description' => 'required|string|max:500',
-            'subject' => 'required|string|max:255', // Validasi kolom subject sebagai teks
+            'description' => 'required|string|max:500'
         ]);
 
         // Simpan data ke database
