@@ -10,6 +10,7 @@ use App\Models\ClassStudents;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\AssignmentsSubmissions;
+use Illuminate\Support\Str;
 
 class TeacherClassesController extends Controller
 {
@@ -64,12 +65,10 @@ class TeacherClassesController extends Controller
         ]);
 
         // Simpan data ke database
-        Classes::create([
-            'name' => $validated['name'],
-            'description' => $validated['description'],
-            'subject' => $validated['subject'], // Menyimpan subject
-            'teacher_id' => Auth::id(), // ID guru yang login
-        ]);
+        $validated['teacher_id'] = Auth::id();
+        $validated['token'] = Str::random(6);
+
+        Classes::create($validated);
 
         // Redirect dengan pesan sukses
         return redirect()->back()->with('success', 'Kelas berhasil dibuat.');

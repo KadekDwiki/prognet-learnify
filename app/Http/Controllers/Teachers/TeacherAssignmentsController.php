@@ -108,30 +108,37 @@ class TeacherAssignmentsController extends Controller
     {
         // Cari tugas berdasarkan ID
         $assignments = Assignments::findOrFail($classId);
+        $classId = $classId;
         $title = 'Edit Tugas';
+        $topic = Lessons::select('title as topic')
+            ->where('class_id', $classId)
+            ->get();
 
-        return view('teachers.assignments-teacher.create-assignments', compact('assignments', 'title'));
+        return view('teachers.assignments-teacher.edit-assignments', compact('assignments','classId', 'topic', 'title'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $classId)
+    public function update(Request $request, string $id)
     {
         //Memperbarui tugas
         $validated = $request->validate([
-            'judul' => 'required|string|max:255',
-            'deskripsi' => 'nullable|string',
-            'tugaskan_ke' => 'required|string',
-            'poin' => 'required|integer',
-            'tenggat' => 'nullable|date',
-            'topik' => 'nullable|string',
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'due_date' => 'nullable|date',
+            'topic' => 'nullable|string',
         ]);
 
-        $assignments = Assignments::findOrFail($classId);
+        $file = $request->file('file');
+        $originalFileName = $file->getClientOriginalName();
+        $filePath = $file->storeAs('uploads/teachers-assignments', $originalFileName, 'public');
+        $validated['file_url'] = $filePath;
+    
+        $assignments = Assignments::findOrFail($id);
         $assignments->update($validated);
-
-        return redirect()->route('create-assignments.update', $classId)->with('success', 'Tugas berhasil diperbarui!');
+    
+        return redirect()->route('assignments.index', $id)->with('success', 'Tugas berhasil diperbarui!');
     }
 
     /**
@@ -139,20 +146,36 @@ class TeacherAssignmentsController extends Controller
      */
     public function destroy($id)
     {
-        $lesson = Assignments::findOrFail($id);
-        $lesson->delete();
+        $assignments = Assignments::findOrFail($id);
+        $assignments->delete();
 
         return redirect()->back()->with('success', 'Tugas berhasil dihapus.');
     }
 
 
-    public function showDetail(string $classId, string $assignmentId)
+    /**public function showDetail(string $classId, string $assignmentId)
     {
         // Cari tugas berdasarkan ID
         $topics = Assignments::findOrFail($assignmentId);
         $title = 'Detail Tugas';
 
-        // Menampilkan view detail tugas
+
+    /**if ($topics->class_id != $classId) {
+        abort(404, 'Kelas atau tugas tidak ditemukan');
+    }*/
+
+    // Menampilkan view detail tugas
+    /**return view('teachers.assignments-teacher.detail-assignments', compact('topics', 'title', 'classId'));
+    }*/
+
+    public function showDetail(string $classId, string $assignmentId)
+    {
+        //dd("Class ID: " . $classId, "Assignment ID: " . $assignmentId);
+
+        $topics = Assignments::findOrFail($assignmentId);
+        $title = 'Detail Tugas';
+
         return view('teachers.assignments-teacher.detail-assignments', compact('topics', 'title', 'classId'));
     }
+
 }
