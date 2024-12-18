@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Teachers;
 
+use App\Models\User;
 use App\Models\Classes;
+use App\Models\Assignments;
 use Illuminate\Http\Request;
 use App\Models\ClassStudents;
 use App\Http\Controllers\Controller;
@@ -108,20 +110,25 @@ class TeacherClassesController extends Controller
     return redirect()->back()->with('error', 'Siswa tidak ditemukan.');
     }
 
-    public function showGrade(string $classId, string $assignmentId)
+    public function showGrade(string $classId)
     {
-       
-        $title = "Nilai";
-        $students = ClassStudents::where('class_id', $classId)->paginate(10);
-
-        $grades = [];
-        foreach ($students as $student) {
-            $grades[$student->id] = AssignmentsSubmissions::where('student_id', $student->id)
-                                                          ->where('assignment_id', $assignmentId)
-                                                          ->first();
-        }
+        $title = "Daftar Nilai";
     
-        return view('teachers.grades', compact('title', 'students', 'grades', 'classId', 'assignmentId'));
+        // Ambil semua tugas untuk class_id tertentu
+        $assignments = Assignments::where('class_id', $classId)->get();
+    
+        // Ambil semua siswa beserta nilai mereka untuk tugas di kelas tersebut
+        $students = User::whereHas('classStudents', function ($query) use ($classId) {
+                $query->where('class_id', $classId);
+            })
+            ->with(['assignmentsSubmissions' => function ($query) use ($assignments) {
+                $query->whereIn('assignment_id', $assignments->pluck('id'));
+            }])
+            ->get();
+    
+        return view('teachers.grades', compact('title', 'students', 'assignments', 'classId'));
     }
+    
+    
     
 }
