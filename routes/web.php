@@ -68,7 +68,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/members-teachers/{id}', [TeacherClassesController::class, 'showMembers'])->name('classes.members-teachers');
         Route::post('/delete-members/{student_id}', [TeacherClassesController::class, 'destroy'])->name('members-teachers.destroy');
-        Route::get('/grades/{classId}/{assignmentId}', [TeacherClassesController::class, 'showGrade'])->name('members-grade.show-grade');
+        Route::get('/grades/{assignmentId}', [TeacherClassesController::class, 'showGrade'])->name('members-grade.show-grade');
 
     });
 
