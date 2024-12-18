@@ -113,21 +113,22 @@ class TeacherClassesController extends Controller
     public function showGrade(string $classId)
     {
         $title = "Daftar Nilai";
-    
+
         // Ambil semua tugas untuk class_id tertentu
         $assignments = Assignments::where('class_id', $classId)->get();
-    
-        // Ambil semua siswa beserta nilai mereka untuk tugas di kelas tersebut
+
+        // Ambil semua siswa beserta nilai mereka untuk tugas di kelas tersebut, dengan pagination
         $students = User::whereHas('classStudents', function ($query) use ($classId) {
                 $query->where('class_id', $classId);
             })
             ->with(['assignmentsSubmissions' => function ($query) use ($assignments) {
                 $query->whereIn('assignment_id', $assignments->pluck('id'));
             }])
-            ->get();
-    
+            ->paginate(4); // 10 siswa per halaman
+
         return view('teachers.grades', compact('title', 'students', 'assignments', 'classId'));
     }
+    
     
     
     
