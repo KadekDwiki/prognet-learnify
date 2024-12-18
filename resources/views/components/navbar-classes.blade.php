@@ -36,7 +36,7 @@
                 Anggota
             </a>
         </div>
-        <div class="nav-link p-2 ps-3 rounded-end-2 {{ request()->is('assignments*') ? 'active' : '' }}">
+        <div class="nav-link p-2 ps-3 rounded-end-2 {{ request()->is('grades*') ? 'active' : '' }}">
             <a href="/grades/{{ $lessonId }}" class="text-decoration-none d-flex align-items-center text-dark">
                 Nilai
             </a>

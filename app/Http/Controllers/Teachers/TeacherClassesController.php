@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\ClassStudents;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Models\AssignmentsSubmissions;
 
 class TeacherClassesController extends Controller
 {
@@ -90,8 +91,20 @@ class TeacherClassesController extends Controller
     return redirect()->back()->with('error', 'Siswa tidak ditemukan.');
     }
 
-    public function showGrade()
+    public function showGrade(string $classId, string $assignmentId)
     {
-        
+       
+        $title = "Nilai";
+        $students = ClassStudents::where('class_id', $classId)->paginate(10);
+
+        $grades = [];
+        foreach ($students as $student) {
+            $grades[$student->id] = AssignmentsSubmissions::where('student_id', $student->id)
+                                                          ->where('assignment_id', $assignmentId)
+                                                          ->first();
+        }
+    
+        return view('teachers.grades', compact('title', 'students', 'grades', 'classId', 'assignmentId'));
     }
+    
 }

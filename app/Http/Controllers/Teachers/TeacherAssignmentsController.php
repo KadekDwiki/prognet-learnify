@@ -115,10 +115,14 @@ class TeacherAssignmentsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $lesson = Assignments::findOrFail($id);
+        $lesson->delete();
+    
+        return redirect()->back()->with('success', 'Tugas berhasil dihapus.');
     }
+    
 
     public function showDetail(string $classId, string $assignmentId)
     {
