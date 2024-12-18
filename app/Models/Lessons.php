@@ -21,4 +21,13 @@ class Lessons extends Model
     {
         return $this->belongsTo(Classes::class, 'class_id');
     }
+    
+    public static function uploadFile($file)
+    {
+        if ($file) {
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            return $file->storeAs('lessons/files', $fileName, 'public');
+        }
+        return null;
+    }
 }

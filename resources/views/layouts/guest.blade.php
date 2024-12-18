@@ -22,6 +22,12 @@
 </head>
 
 <body>
+   @if (session('success'))
+      <div class="alert alert-success alert-dismissible fade show w-50 position-absolute start-50 translate-middle z-3" role="alert" style="top: 80px">
+         <strong>Berhasil!</strong> {{ session('success') }}
+         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+   @endif
    <div class="position-relative overflow-x-hidden vw-100 min-vh-100 d-flex align-items-center justify-content-center flex-column">
       <div class="wrapper d-flex flex-column align-items-center justify-content-start">
          <img src="{{ asset('images/logo.png') }}" class="w-50" alt="logo-image">

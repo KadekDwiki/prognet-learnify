@@ -30,7 +30,6 @@
                         </div>
                   </div>
                @endif
-               
                @if (empty($submission))
                   <form action="{{ route('classes.upload_submission') }}" method="POST" enctype="multipart/form-data" class="pt-5 border-top border-secondary">
                      @csrf
@@ -55,8 +54,10 @@
                         <h4 class="alert-heading">Well done!</h4>
                         <p>Aww yeah, kamu berhasil mengumpulkan tugasmu itu sangat keren mantap keren aseli keren banget, tunggu tugasmu akan dinilai ya dan nikmati hasil dari kerja kerasmu</p>
                         <hr>
-                        <p class="mb-0"> Pratinjau tugasmu: <a href="{{ asset('storage/' . $submission->file_url) }}" class="text-dark text-decoration-none fw-semibold" target="_blank">
-                           {{ Str::limit($submission->file_url, 70, '...') }}
+                        <p class="mb-0"> Pratinjau tugasmu: 
+                           <a data-fancybox data-type="iframe" href="{{ asset("storage/$submission->file_url") }}">
+                              Lihat tugas
+                           </a>  
                         </a></p>
                      </div>  
                   </div>

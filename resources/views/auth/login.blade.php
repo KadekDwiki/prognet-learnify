@@ -9,7 +9,7 @@
             <label for="email" class="form-label">Email</label>
             <input type="email" name="email" class="form-control border-primary @error('email') is-invalid border-danger @enderror" id="email" placeholder="name@example.com" required>
             @error('email')
-            <div class="invalid-feedback">
+            <div class="invalid-feedback"> 
                {{ $message }}
             </div>
             @enderror
