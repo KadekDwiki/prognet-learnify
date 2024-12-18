@@ -107,8 +107,11 @@
                                 <!-- Footer -->
                                 <div class="modal-footer">
                                     <a href="{{ url('/assignments/' . $classId . '/' . $assignment->id) }}"
-                                        class="btn btn-link">Lihat detail</a>
-                                    <button type="button" class="btn btn-primary">Tinjau Tugas</button>
+                                        class="btn btn-link">Lihat detail
+                                    </a>
+                                    <a href="/submissions-teacher/{{ $classId }}/{{ $assignment->id }}"
+                                        class="btn btn-primary">Cek Tugas
+                                    </a>
                                 </div>
                             </div>
                         </div>

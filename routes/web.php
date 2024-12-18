@@ -72,6 +72,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/delete-members/{student_id}', [TeacherClassesController::class, 'destroy'])->name('members-teachers.destroy');
         Route::get('/grades/{assignmentId}', [TeacherClassesController::class, 'showGrade'])->name('members-grade.show-grade');
 
+        Route::get('/submissions-teacher/{classId}/{assigmentId}', [TeacherAssignmentsController::class, 'showSubmissionsByAssignmentId'])->name('submissions-teacher');
+        Route::put('/submissions-teacher/update-grade', [TeacherAssignmentsController::class, 'updateSubmissionGrade'])->name('submissions-teacher.update_grade');
     });
-
 });

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Teachers;
 use App\Models\Assignments;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\AssignmentsSubmissions;
 use App\Models\Lessons;
 
 class TeacherAssignmentsController extends Controller
@@ -41,7 +42,7 @@ class TeacherAssignmentsController extends Controller
             ->where('class_id', $classId)
             ->get();
 
-        return view('teachers.assignments-teacher.create-assignments', compact('title','classId','topic'));
+        return view('teachers.assignments-teacher.create-assignments', compact('title', 'classId', 'topic'));
     }
 
     /**
@@ -64,19 +65,40 @@ class TeacherAssignmentsController extends Controller
 
         $validated['file_url'] = $filePath;
         $validated['class_id'] = $request->class_id;
-        
+
         // dd($validated);
         Assignments::create($validated);
-    
+
         return redirect()->route('assignments.index', $request->class_id)->with('success', 'Tugas berhasil dibuat!');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $classId)
+    public function showSubmissionsByAssignmentId(string $classId, string $assignmentId)
     {
-        // 
+        $title = 'Tugas Siswa';
+        $classId = $classId;
+        $studentsSubmissions = AssignmentsSubmissions::join('users', 'assignments_submissions.student_id', '=', 'users.id')
+            ->select('assignments_submissions.id as id', 'assignments_submissions.assignment_id', 'users.name', 'assignments_submissions.file_url', 'assignments_submissions.grade')
+            ->where('assignment_id', '=', $assignmentId)->get();
+        // dd($studentsSubmissions);
+        return view('teachers.assignments-teacher.assignments-grade', compact('title', 'classId', 'studentsSubmissions'));
+    }
+
+    public function updateSubmissionGrade(Request $request)
+    {
+        // dd($request);
+        $validated = $request->validate([
+            'grade' => 'required|numeric|min:0|max:100',
+        ]);
+
+        $submissionId = $request->submission_id;
+
+        $assignments = AssignmentsSubmissions::find($submissionId);
+        $assignments->update($validated);
+
+        return redirect()->back()->with('success', 'Tugas berhasil Dinilai!');
     }
 
     /**
@@ -105,10 +127,10 @@ class TeacherAssignmentsController extends Controller
             'tenggat' => 'nullable|date',
             'topik' => 'nullable|string',
         ]);
-    
+
         $assignments = Assignments::findOrFail($classId);
         $assignments->update($validated);
-    
+
         return redirect()->route('create-assignments.update', $classId)->with('success', 'Tugas berhasil diperbarui!');
     }
 
@@ -119,18 +141,18 @@ class TeacherAssignmentsController extends Controller
     {
         $lesson = Assignments::findOrFail($id);
         $lesson->delete();
-    
+
         return redirect()->back()->with('success', 'Tugas berhasil dihapus.');
     }
-    
+
 
     public function showDetail(string $classId, string $assignmentId)
     {
-    // Cari tugas berdasarkan ID
-    $topics = Assignments::findOrFail($assignmentId);
-    $title = 'Detail Tugas';
+        // Cari tugas berdasarkan ID
+        $topics = Assignments::findOrFail($assignmentId);
+        $title = 'Detail Tugas';
 
-    // Menampilkan view detail tugas
-    return view('teachers.assignments-teacher.detail-assignments', compact('topics', 'title', 'classId'));
+        // Menampilkan view detail tugas
+        return view('teachers.assignments-teacher.detail-assignments', compact('topics', 'title', 'classId'));
     }
 }
