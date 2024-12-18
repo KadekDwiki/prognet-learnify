@@ -129,6 +129,9 @@ class ClassesController extends Controller
         $lessonId = $id;
         $classes = Classes::with('assignments')->find($id);
         $assignments = $classes->assignments;
+        //$assignments = Assignments::with('classes')->find($id);
+        //$classes = $assignments->classes;
+        //dd($classes);
 
         return view('students.assignments.assignments_class', compact('title', 'assignments', 'lessonId'));
     }
