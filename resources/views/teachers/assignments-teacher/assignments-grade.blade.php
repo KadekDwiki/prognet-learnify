@@ -33,7 +33,7 @@
                             <td>
                                 <a data-fancybox data-type="iframe" href="{{ asset("storage/$submission->file_url") }}">
                                     Lihat tugas
-                                </a>                                
+                                 </a>                                
                             </td>
                             <td>
                                 <input type="hidden" name="submission_id" value="{{ $submission->id }}">
