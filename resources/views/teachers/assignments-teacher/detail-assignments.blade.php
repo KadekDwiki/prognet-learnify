@@ -28,6 +28,9 @@
                            <a href="{{ $topics->file_url }}" class="text-dark text-decoration-none" target="_blank">
                               {{ Str::limit($topics->file_url, 70, '...') }}
                            </a>
+                           <a data-fancybox data-type="iframe" href="{{ asset("storage/$topics->file_url") }}">
+                              Lihat tugas
+                           </a> 
                         </div>
                   </div>
             @endif
