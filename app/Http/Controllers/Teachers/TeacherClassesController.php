@@ -124,7 +124,7 @@ class TeacherClassesController extends Controller
             ->with(['assignmentsSubmissions' => function ($query) use ($assignments) {
                 $query->whereIn('assignment_id', $assignments->pluck('id'));
             }])
-            ->paginate(4); // 10 siswa per halaman
+            ->paginate(10); 
 
         return view('teachers.grades', compact('title', 'students', 'assignments', 'classId'));
     }
