@@ -32,7 +32,7 @@
             <div class="d-flex justify-content-center align-items-center flex-column">
                <img src="{{ asset('images/rainy-face.png') }}" alt="">
                <p>Yahh, kamu belom ada kelas</p>
-               <a href="" class="btn btn-primary rounded-pill px-4">Gabung Kelas</a>
+               <a href="" class="btn btn-primary rounded-pill px-4">Buat Kelas</a>
             </div>
          </div>
       @endif

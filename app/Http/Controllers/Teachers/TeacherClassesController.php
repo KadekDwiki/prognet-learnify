@@ -56,8 +56,25 @@ class TeacherClassesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validasi input
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string|max:500',
+            'subject' => 'required|string|max:255', // Validasi kolom subject sebagai teks
+        ]);
+
+        // Simpan data ke database
+        Classes::create([
+            'name' => $validated['name'],
+            'description' => $validated['description'],
+            'subject' => $validated['subject'], // Menyimpan subject
+            'teacher_id' => Auth::id(), // ID guru yang login
+        ]);
+
+        // Redirect dengan pesan sukses
+        return redirect()->back()->with('success', 'Kelas berhasil dibuat.');
     }
+
 
     /**
      * Display the specified resource.
@@ -96,21 +113,22 @@ class TeacherClassesController extends Controller
     public function showGrade(string $classId)
     {
         $title = "Daftar Nilai";
-    
+
         // Ambil semua tugas untuk class_id tertentu
         $assignments = Assignments::where('class_id', $classId)->get();
-    
-        // Ambil semua siswa beserta nilai mereka untuk tugas di kelas tersebut
+
+        // Ambil semua siswa beserta nilai mereka untuk tugas di kelas tersebut, dengan pagination
         $students = User::whereHas('classStudents', function ($query) use ($classId) {
                 $query->where('class_id', $classId);
             })
             ->with(['assignmentsSubmissions' => function ($query) use ($assignments) {
                 $query->whereIn('assignment_id', $assignments->pluck('id'));
             }])
-            ->get();
-    
+            ->paginate(10); 
+
         return view('teachers.grades', compact('title', 'students', 'assignments', 'classId'));
     }
+    
     
     
     

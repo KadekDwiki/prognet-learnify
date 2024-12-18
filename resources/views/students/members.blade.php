@@ -4,14 +4,20 @@
     <x-navbar-classes :lessonId="$lessonId"/>
     <div class="content-classes d-flex justify-content-center w-100" >
         <div class="d-flex w-75 align-items-center flex-column gap-3">
-
-        <button type="button" class="btn btn-outline-danger ms-auto" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Keluar</button>
-            
-        <div class="text-bg-info p-3 shadow-sm rounded-5">
-            <p class="m-0">Guru:</p>
-            <p class="m-0"> {{ $teacher->name }}</p>
-        </div>
-        
+            <div class="card p-3 shadow-sm rounded-4 d-flex align-items-center" style="min-width: 400px; background-color:#EFF4FF; border: 2px solid rgba(178, 218, 255, 0.9); box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 1);">
+                <div class="d-flex align-items-center" style="width: 100%; justify-content: flex-start;">
+                    <!-- Gambar dengan styling bulat dan kecil -->
+                    <img src="{{ asset($teacher->profile_photo_path) }}" alt="Profile" class="rounded-circle me-3" style="width: 50px; height: 50px; object-fit: cover; border: 2px solid #B2DAFF;">
+                    
+                    <!-- Teks berada di sebelah kanan gambar -->
+                    <div>
+                        <p class="mb-0"><b>Guru :</b></p>
+                        <p class="mb-0">{{ $teacher->name }}</p>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-outline-danger ms-auto" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Keluar</button>
+                    
             <table class="table border">
                 <thead>
                     <tr>
@@ -31,8 +37,7 @@
                 </tbody>
             </table>
 
-            <div class="d-flex justify-content-center grid gap-2 column-gap-3">
-                
+            <div class="d-flex justify-content-center grid gap-2 column-gap-3">                
                 {{ $students->links() }}
             </div>
         </div>        

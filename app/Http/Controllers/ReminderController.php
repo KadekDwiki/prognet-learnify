@@ -22,14 +22,15 @@ class ReminderController extends Controller
         // Ambil ID kelas yang diikuti siswa melalui relasi many-to-many
         $classIds = $user->classes()->pluck('classes.id'); // Ambil id dari tabel classes
 
-        // Query untuk mendapatkan tugas berdasarkan kelas yang diikuti siswa dan filter tanggal
+        // Query untuk mendapatkan tugas yang belum dikerjakan oleh siswa
         $assignments = Assignments::whereIn('class_id', $classIds) // Filter berdasarkan kelas siswa
-            ->when($selectedDate, function ($query, $selectedDate) {
+            ->whereDoesntHave('submissions', function ($query) use ($user) {
+                // Filter tugas yang belum memiliki submissions oleh siswa yang sedang login
+                $query->where('student_id', $user->id);
+            })
+            ->when($selectedDate, function ($query) use ($selectedDate) {
                 // Filter berdasarkan tanggal jika dipilih
                 return $query->whereDate('due_date', $selectedDate);
-            }, function ($query) {
-                // Jika tanggal kosong, ambil semua data
-                return $query;
             })
             ->with('classes') // Relasi untuk mendapatkan data kelas dari tugas
             ->get();
@@ -41,4 +42,5 @@ class ReminderController extends Controller
             'selectedDate' => $selectedDate
         ]);
     }
+
 }
