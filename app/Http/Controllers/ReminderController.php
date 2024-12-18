@@ -27,6 +27,9 @@ class ReminderController extends Controller
             ->when($selectedDate, function ($query, $selectedDate) {
                 // Filter berdasarkan tanggal jika dipilih
                 return $query->whereDate('due_date', $selectedDate);
+            }, function ($query) {
+                // Jika tanggal kosong, ambil semua data
+                return $query;
             })
             ->with('classes') // Relasi untuk mendapatkan data kelas dari tugas
             ->get();

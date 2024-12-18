@@ -11,21 +11,7 @@
       </div>
    </div>
 
-   @if(count($classes) > 0)
-      <div class="class-cards gap-3">
-         @foreach ($classes as $class)
-            <x-card-class :classId="$class->class_id" :name="$class->class_name" :teacher="$class->teacher_name" task="10" progress="20" />
-         @endforeach
-      </div>
-   @else
-      <div class="empty-classes">
-         <div class="d-flex justify-content-center align-items-center flex-column">
-            <img src="{{ asset('images/tanjuk-atas.png') }}" alt="" width="300" class="mb-2">
-            <p>Yahh, kamu belom ada kelas, <b>Yukk Gabung Kelas...</b></p>
-         </div>
-      </div>
-   @endif
-
+   <!-- Pemberitahuan (alert) dipindahkan ke atas -->
    @if (session('success'))
       <div class="alert alert-success alert-dismissible fade show" role="alert">
          <strong>Berhasil</strong> {{ session('success') }}
@@ -40,13 +26,31 @@
       </div>
    @endif
 
-   <div class="classes">
-      <div class="class-cards gap-3">
-         @foreach ($classes as $class)
-            <x-card-class :classId="$class->class_id" :name="$class->class_name" :teacher="$class->teacher_name" task="10" progress="20" />
-         @endforeach
+   <!-- Menampilkan semua kelas dengan 2 kolom per baris -->
+   @if(count($classes) > 0)
+      <div class="container">
+         <div class="row g-4"> <!-- Menggunakan Bootstrap Grid System -->
+            @foreach ($classes as $class)
+               <div class="col-md-6"> <!-- Membagi dalam 2 kolom per baris -->
+                  <x-card-class 
+                     :classId="$class->class_id" 
+                     :name="$class->class_name" 
+                     :teacher="$class->teacher_name" 
+                     task="10" 
+                     progress="20" 
+                  />
+               </div>
+            @endforeach
+         </div>
       </div>
-   </div>
+   @else
+      <div class="empty-classes">
+         <div class="d-flex justify-content-center align-items-center flex-column">
+            <img src="{{ asset('images/tanjuk-atas.png') }}" alt="" width="300" class="mb-2">
+            <p>Yahh, kamu belom ada kelas, <b>Yukk Gabung Kelas...</b></p>
+         </div>
+      </div>
+   @endif
 
    <!-- Modal untuk Gabung Kelas -->
    <div class="modal fade" id="joinClassModal" tabindex="-1" aria-labelledby="joinClassModalLabel" aria-hidden="true">
@@ -85,5 +89,4 @@
          joinButton.disabled = classCode.trim() === '';
       });
    </script>
-
 @endsection

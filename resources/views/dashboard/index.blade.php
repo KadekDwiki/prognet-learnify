@@ -60,50 +60,55 @@
                @endforeach
             </div>
          @else
-            <div class="empty-classes">
-               <div class="d-flex justify-content-center align-items-center flex-column">
-                  <img src="{{ asset('images/rainy-face.png') }}" alt="">
-                  <p>Yahh, kamu belom ada kelas</p>
-                  <a href="" class="btn btn-primary rounded-pill px-4">Gabung Kelas</a>
-               </div>
+         <div class="empty-classes">
+            <div class="d-flex justify-content-center align-items-center flex-column">
+               <img src="{{ asset('images/rainy-face.png') }}" alt="">
+               <p>Yahh, kamu belom ada kelas</p>
+               <!-- Tombol ini juga membuka modal -->
+               <button type="button" class="btn btn-primary rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#joinClassModal">
+                  Gabung Kelas
+               </button>
             </div>
+         </div>
          @endif
       </div>
-   @endif
 
-   {{-- teacher --}}
-   @if (auth()->user()->role == 'teacher')
-      <div class="banner banner-dashboard px-5 rounded-5 d-flex justify-content-between align-items-center mb-3 shadow-sm">
-         <div class="banner-text">
-            <h2 class="text-light">Sebarkan Ilmu Pengetahuan dengan Learnify.</h2>
-            <p class="text-light">Dilengkapi dengan pengingat dan progress tracker untuk mendukung proses mengajarmu.</p>
-         </div>
-         <div class="banner-image">
-            <img src="{{ asset('images\dashboard-teachers.png') }}" alt="">
-         </div>
-      </div>
-
-      <div class="classes">
-         <div class="d-flex justify-content-between">
-            <h5 class="text-primary mb-3">Kelasmu ({{ $classCountTeacher }})</h5>
-            <a href="{{ route('classes-teachers') }}" class="link-offset-2">Lihat Semua</a>
-         </div>
-         
-         @if(count($classesTeacher) > 0)
-            <div class="class-cards gap-3">
-               @foreach ($classesTeacher as $class)
-                  <x-card-class :classId="$class->class_id" :name="$class->class_name" :teacher="$class->teacher_name" task="10" progress="20" />
-               @endforeach
-            </div>
-         @else
-            <div class="empty-classes">
-               <div class="d-flex justify-content-center align-items-center flex-column">
-                  <img src="{{ asset('images/rainy-face.png') }}" alt="">
-                  <p>Yahh, kamu belom ada kelas</p>
-                  <a href="" class="btn btn-primary rounded-pill px-4">Gabung Kelas</a>
+      <!-- Modal untuk Gabung Kelas -->
+      <div class="modal fade" id="joinClassModal" tabindex="-1" aria-labelledby="joinClassModalLabel" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="joinClassModalLabel">Masukkan Kode Kelas</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body">
+                  <form id="joinClassForm" action="{{ route('join.class') }}" method="POST">
+                     @csrf
+                     <div class="mb-3">
+                        <label for="classCode" class="form-label">Kode Kelas</label>
+                        <input type="text" class="form-control" id="classCode" name="classCode" required>
+                        <div class="invalid-feedback">
+                           Kode kelas harus diisi.
+                        </div>
+                     </div>
+                     <div class="mb-3">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary" id="joinClassButton" disabled>Gabung</button>
+                     </div>
+                  </form>
                </div>
             </div>
-         @endif
+         </div>
       </div>
+
+      <!-- JavaScript untuk Validasi Input Modal -->
+      <script>
+         document.getElementById('classCode').addEventListener('input', function () {
+            const classCode = document.getElementById('classCode').value;
+            const joinButton = document.getElementById('joinClassButton');
+            joinButton.disabled = classCode.trim() === '';
+         });
+      </script>
+
    @endif
 @endsection

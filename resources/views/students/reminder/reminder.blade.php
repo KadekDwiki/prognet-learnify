@@ -49,12 +49,13 @@
                  </div>
              </div>
              @empty
-                        
+            </div>
+                <div class="banner-image d-flex flex-column justify-content-center align-items-center text-center">
+                    <img src="{{ asset('images/rainy-smile.png') }}" alt="" height="120" width="120" class="mb-2">
+                    <p class="text-muted">Tidak ada tugas yang tersedia untuk tanggal ini.</p>
+                </div>
+            </div>
              @endforelse
-         </div>
-         <div class="banner-image d-flex flex-column justify-content-center align-items-center text-center">
-            <img src="{{ asset('images/rainy-smile.png') }}" alt="" height="120" width="120" class="mb-2">
-            <p class="text-muted">Tidak ada tugas yang tersedia untuk tanggal ini.</p>
          </div>
       </div>
 
