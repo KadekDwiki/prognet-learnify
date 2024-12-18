@@ -1,7 +1,7 @@
 @extends('layouts.authenticated')
 
 @section('content')
-
+    
       <div class="banner px-5 py-1 rounded-5 d-flex justify-content-start align-items-center mb-3 shadow-sm banner-reminder">  
          <div class="banner-text">
             <h3 class="text-light m-0 me-3">Langkah kecil hari ini, hasil besar di masa depan. Yuk belajar!</h3>
@@ -10,7 +10,7 @@
             <img src="{{ asset('images\api-reminder-aka-streak.png') }}" alt="" height='96' weight='74'>
          </div>
       </div>
-
+    
       <div class="d-flex flex-column p-5 shadow-sm">
           <!-- Form untuk filter berdasarkan tanggal -->
          <form method="GET" action="{{ route('reminder') }}">
@@ -33,7 +33,7 @@
                      </a>
                  </div>
                  <div class="description d-flex gap-2 flex-column w-100">
-                     <p class="px-3" style="width: fit-content">
+                     <p class="px-3" style="width: fit-content; height:36px">
                          {{ $assignment->title }}
                      </p>
                      <div class="d-flex align-items-center bg-white bg-opacity-50 shadow-sm p-3 rounded-3">

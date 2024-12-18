@@ -4,9 +4,11 @@
    <x-navbar-classes :lessonId="$lessonId"/>
    <div class="content-classes d-flex justify-content-center w-100">
       <div class="d-flex w-50 align-items-center flex-column gap-3">
-         <div class="progress w-100" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-            <div class="progress-bar" style="width: 25%">25%</div>
-         </div>
+         @if ($assignments->isNotEmpty())
+            <div class="progress w-100" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+               <div class="progress-bar" style="width: 25%">25%</div>
+            </div>
+         @endif
 
          <div class="row w-100 mt-4 gap-4">
             @foreach ($assignments as $assignment) 
@@ -27,6 +29,12 @@
                </div>
             @endforeach
          </div>
+         @if ($assignments->isEmpty())
+            <div class="banner-image d-flex flex-column justify-content-center align-items-center text-center" style="height: 500px;">
+               <img src="{{ asset('images/rainy-smile.png') }}" alt="" height="120" width="120" class="mb-2">
+               <p class="text-muted">Yeayy Belum ada Tugass nihh...</p>
+            </div>
+         @endif
       </div>
    </div>
 @endsection
