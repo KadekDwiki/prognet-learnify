@@ -30,4 +30,9 @@ class Assignments extends Model
     {
         return $this->belongsTo(Assignments::class, 'assignment_id', 'id');
     }
+
+    public function submissions()
+    {
+        return $this->hasMany(AssignmentsSubmissions::class, 'assignment_id');
+    }
 }

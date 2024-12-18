@@ -127,8 +127,23 @@ class ClassesController extends Controller
     {
         $title = "Daftar Tugas";
         $lessonId = $id;
-        $classes = Classes::with('assignments')->find($id);
-        $assignments = $classes->assignments;
+
+        $assignments = Assignments::where('assignments.class_id', $id)
+            ->leftJoin('assignments_submissions', function ($join) {
+                $join->on('assignments.id', '=', 'assignments_submissions.assignment_id')
+                    ->where('assignments_submissions.student_id', auth()->id());
+            })
+            ->select(
+                'assignments.id',
+                'assignments.class_id',
+                'assignments.title',
+                'assignments.due_date',
+                'assignments.description',
+                'assignments_submissions.grade'
+            )
+            ->get();
+
+        // dd($assignments);
 
         return view('students.assignments.assignments_class', compact('title', 'assignments', 'lessonId'));
     }

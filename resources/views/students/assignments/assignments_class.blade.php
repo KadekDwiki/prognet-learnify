@@ -3,7 +3,7 @@
 @section('content')
    <x-navbar-classes :lessonId="$lessonId"/>
    <div class="content-classes d-flex justify-content-center w-100">
-      <div class="d-flex w-50 align-items-center flex-column gap-3">
+      <div class="d-flex w-75 align-items-center flex-column gap-3">
          <div class="progress w-100" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
             <div class="progress-bar" style="width: 25%">25%</div>
          </div>
@@ -19,9 +19,9 @@
                      <p class="mb-0">{{ Str::limit($assignment->content, 40, '...') }}</p>
                      <a href="/assignments/{{ $assignment->class_id }}/{{ $assignment->id }}">Lihat Tugas</a>
                   </div>
-                  <div class="action">
-                     <span class="btn btn-primary">
-                        <x-icon class="" name="ic:round-check" width="28" height="28" />
+                  <div class="grade">
+                     <span class="px-3 py-2 fw-semibold rounded-3 border border-primary">
+                        {{ empty($assignment->grade) ? "0" : $assignment->grade }} / 100
                      </span>
                   </div>
                </div>
