@@ -47,26 +47,32 @@ class TeacherLessonsController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'files.*' => 'nullable|mimes:jpg,png,pdf|max:2048',
-        ]);
+{
+    $request->validate([
+        'class_id'    => 'required|integer', // Validasi class_id
+        'title'       => 'required|string|max:255',
+        'description' => 'required|string',
+        'files.*'     => 'nullable|file|mimes:jpg,png,pdf|max:2048',
+    ]);
 
-        // Simpan data tugas
-        $assignment = Lessons::create([
-            'title' => $request->input('title'),
-        ]);
-
-        // Simpan file jika ada
-        if ($request->hasFile('files')) {
-            foreach ($request->file('files') as $file) {
-                $path = $file->store('assignments', 'public');
-                $assignment->files()->create(['path' => $path]);
-            }
+    // Proses file jika ada
+    $fileUrl = null;
+    if ($request->hasFile('files')) {
+        foreach ($request->file('files') as $file) {
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $fileUrl = $file->storeAs('lessons/files', $fileName, 'public');
         }
+    }
 
-        return redirect()->route('assignments.index')->with('success', 'Tugas berhasil dibuat!');
+    // Simpan data lesson
+    Lessons::create([
+        'class_id' => $request->class_id, // Ambil class_id dari request
+        'title'    => $request->title,
+        'content'  => $request->description,
+        'file_url' => $fileUrl,
+    ]);
+
+    return redirect()->route('classes.lessons-teachers', $request->class_id)->with('success', 'Materi berhasil diunggah!');
     }
 
     /**
@@ -74,7 +80,11 @@ class TeacherLessonsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $lesson = Lessons::findOrFail($id);
+        $title = "Edit Materi";
+        $classId = $lesson->class_id;
+    
+        return view('teachers.lessons-teacher.lessons-add', compact('lesson', 'title', 'classId'));
     }
 
     /**
@@ -82,8 +92,33 @@ class TeacherLessonsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $lesson = Lessons::findOrFail($id);
+    
+        $request->validate([
+            'title'       => 'required|string|max:255',
+            'description' => 'required|string',
+            'files.*'     => 'nullable|file|mimes:jpg,png,pdf|max:2048',
+        ]);
+    
+        // Proses file jika ada
+        if ($request->hasFile('files')) {
+            $fileUrl = null;
+            foreach ($request->file('files') as $file) {
+                $fileName = time() . '_' . $file->getClientOriginalName();
+                $fileUrl = $file->storeAs('lessons/files', $fileName, 'public');
+            }
+            $lesson->file_url = $fileUrl;
+        }
+    
+        // Update data lesson
+        $lesson->update([
+            'title'    => $request->title,
+            'content'  => $request->description,
+        ]);
+    
+        return redirect()->route('classes.lessons-teachers', $lesson->class_id)->with('success', 'Materi berhasil diperbarui!');
     }
+    
 
     /**
      * Remove the specified resource from storage.

@@ -20,8 +20,9 @@ class RegisterController extends Controller
         $validate = $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6',
-            'telp' => 'required|max:15'
+            'telp' => 'required|max:15',
+            'role' => 'string',
+            'password' => 'required|min:6'
         ]);
 
         $validate['password'] = Hash::make($request->password);

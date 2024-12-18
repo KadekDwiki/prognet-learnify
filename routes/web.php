@@ -57,7 +57,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/lessons-teachers/{classId}/{lessonsId}', [TeacherLessonsController::class, 'show'])->name('lessons.detail');
         Route::get('/add-lessons/{classId}', [TeacherLessonsController::class, 'create'])->name('add-lessons');
         Route::delete('/lessons-teachers/{id}', [TeacherLessonsController::class, 'destroy'])->name('lessons-teachers.destroy');
-
+        Route::post('/lessons', [TeacherLessonsController::class, 'store'])->name('lessons.store');
+        Route::get('/edit-lessons/{id}', [TeacherLessonsController::class, 'edit'])->name('lessons.edit');
+        Route::put('/update-lessons/{id}', [TeacherLessonsController::class, 'update'])->name('lessons.update');
 
         Route::get('/assignments-teachers/{classId}', [TeacherAssignmentsController::class, 'index'])->name('assignments.index');
         Route::get('/assignments-create/{classId}', [TeacherAssignmentsController::class, 'create'])->name('assignments.create');
