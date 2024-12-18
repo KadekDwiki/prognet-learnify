@@ -41,8 +41,8 @@
                              <x-icon class="text-primary" name="akar-icons:file" height="44" width="44" />
                          </div>
                          <div class="card-desc">
-                             <a href="" class="text-dark text-decoration-none" target="_blank">
-                                 {{ $assignment->assignment_file }}
+                             <a href="/assignments/{{ $assignment->class_id }}/{{ $assignment->id }}" class="text-dark text-decoration-none">
+                                 {{ $assignment->file_url }}
                              </a>
                          </div>
                      </div>
@@ -50,7 +50,7 @@
              </div>
              @empty
             </div>
-                <div class="banner-image d-flex flex-column justify-content-center align-items-center text-center">
+                <div class="banner-image d-flex flex-column justify-content-center align-items-center text-center" style="height: 300px;">
                     <img src="{{ asset('images/rainy-smile.png') }}" alt="" height="120" width="120" class="mb-2">
                     <p class="text-muted">Tidak ada tugas yang tersedia untuk tanggal ini.</p>
                 </div>
