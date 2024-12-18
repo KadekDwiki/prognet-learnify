@@ -9,7 +9,7 @@
             
         <div class="text-bg-info p-3 shadow-sm rounded-5">
             <p class="m-0">Guru:</p>
-            <p class="m-0"> {{ $teacherName }}</p>
+            <p class="m-0"> {{ $teacher->name }}</p>
         </div>
         
             <table class="table border">
