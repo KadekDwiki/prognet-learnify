@@ -27,6 +27,9 @@
                            <a href="{{ $assignment->file_url }}" class="text-dark text-decoration-none" target="_blank">
                               {{ Str::limit($assignment->file_url, 70, '...') }}
                            </a>
+                           <a data-fancybox data-type="iframe" href="{{ asset("storage/$assignment->file_url") }}">
+                              Lihat materi
+                           </a>
                         </div>
                   </div>
                @endif
