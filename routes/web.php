@@ -64,7 +64,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/assignments/edit/{classId}', [TeacherAssignmentsController::class, 'edit'])->name('assignments.edit');
         Route::put('/assignments/update/{classId}', [TeacherAssignmentsController::class, 'update'])->name('assignments.update');
         Route::delete('/assignments/delete/{classId}', [TeacherAssignmentsController::class, 'destroy'])->name('assignments.destroy');
-        Route::get('/assignments/{classId}/{assignmentId}', [TeacherAssignmentsController::class, 'showDetail'])->name('assignments.showDetail');
+        Route::get('/assignments-teachers/{classId}/{assignmentId}', [TeacherAssignmentsController::class, 'showDetail'])->name('assignments.showDetail');
 
         Route::get('/members-teachers/{id}', [TeacherClassesController::class, 'showMembers'])->name('classes.members-teachers');
         Route::post('/delete-members/{student_id}', [TeacherClassesController::class, 'destroy'])->name('members-teachers.destroy');
