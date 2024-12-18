@@ -30,4 +30,14 @@ class Classes extends Model
     {
         return $this->hasMany(Assignments::class, 'class_id');
     }
+    
+    public function teacher()
+    {
+        return $this->belongsTo(User::class, 'teacher_id'); 
+    }
+
+    public function delete()
+    {
+        return $this->belongsTo(ClassStudents::class, 'student_id');
+    }
 }
