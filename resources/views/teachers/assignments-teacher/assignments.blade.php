@@ -10,10 +10,10 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
-            <div class="progress w-100" role="progressbar" aria-label="Example with label" aria-valuenow="25"
+            {{-- <div class="progress w-100" role="progressbar" aria-label="Example with label" aria-valuenow="25"
                 aria-valuemin="0" aria-valuemax="100">
                 <div class="progress-bar" style="width: 25%">25%</div>
-            </div>
+            </div> --}}
             <div class="add-lesson w-100 d-flex justify-content-end">
                 <a href="{{ "/assignments-create/$classId" }}" class="btn btn-primary">
                     <x-icon class="" name="ic:round-plus" width="28" height="28" />
