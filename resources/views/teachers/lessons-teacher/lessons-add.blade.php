@@ -34,7 +34,7 @@
                 <div contenteditable="true" class="form-control" id="editor" style="min-height: 150px;">
                     {{-- Deskripsi --}}
                 </div>
-                <div class="toolbar mb-2">
+                <div class="toolbar mt-1 mb-2">
                     <button type="button" class="btn btn-light" onclick="document.execCommand('bold', false, '')">
                         <b>B</b>
                     </button>

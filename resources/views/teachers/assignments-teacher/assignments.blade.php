@@ -34,7 +34,7 @@
                      <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#assignmentModal">
                            <x-icon class="" name="solar:eye-broken" width="28" height="28" />
                      </a>
-                     <a href="" class="btn btn-sm btn-warning">
+                     <a href="{{ route('assignments.edit', $assignment->id) }}" class="btn btn-sm btn-warning">
                         <x-icon class="text-white" name="solar:pen-broken" width="28" height="28" />
                      </a>
                      <a href="" class="btn btn-sm btn-danger">
@@ -71,7 +71,9 @@
                       </div>
                       <!-- Footer -->
                       <div class="modal-footer">
-                        <a href="{{ url('/assignments/' . $classId . '/' . $assignment->id) }}"  class="btn btn-link">Lihat detail</a>
+                        <a href="{{ route('assignments.showDetail', ['classId' => $classId, 'assignmentId' => $assignment->id]) }}" class="btn btn-link">
+                           Lihat detail
+                       </a> 
                         <button type="button" class="btn btn-primary">Tinjau Tugas</button>
                       </div>
                     </div>

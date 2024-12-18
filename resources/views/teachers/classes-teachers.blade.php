@@ -57,7 +57,17 @@
                   </div>
                   <div class="mb-3">
                      <label for="classSubject" class="form-label">Mata Pelajaran</label>
-                     <input type="text" class="form-control" id="classSubject" name="subject" placeholder="Masukkan nama mata pelajaran" required>
+                     <select class="form-select" id="classSubject" name="subject" required>
+                        <option value="">Pilih Mata Pelajaran</option>
+                        <option value="Matematika">Matematika</option>
+                        <option value="IPA">IPA</option>
+                        <option value="IPS">IPS</option>
+                        <option value="Bahasa Inggris">Bahasa Inggris</option>
+                        <option value="Bahasa Indonesia">Bahasa Indonesia</option>
+                        <option value="Fisika">Fisika</option>
+                        <option value="Kimia">Kimia</option>
+                        <option value="Biologi">Biologi</option>
+                     </select>
                   </div>                             
                   <div class="modal-footer">
                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
@@ -68,5 +78,36 @@
          </div>
       </div>
    </div>
+
+   <!-- Menambahkan JavaScript untuk Validasi Form -->
+   <script>
+      // Validasi input Nama Kelas
+      document.getElementById('createClassForm').addEventListener('submit', function (event) {
+         const className = document.getElementById('className').value;
+         const classDescription = document.getElementById('classDescription').value;
+         const classSubject = document.getElementById('classSubject').value;
+
+         // Cek apakah Nama Kelas kosong
+         if (className.trim() === '') {
+            alert('Nama Kelas tidak boleh kosong.');
+            event.preventDefault();
+            return;
+         }
+
+         // Cek apakah Deskripsi kosong
+         if (classDescription.trim() === '') {
+            alert('Deskripsi tidak boleh kosong.');
+            event.preventDefault();
+            return;
+         }
+
+         // Cek apakah Mata Pelajaran dipilih
+         if (classSubject === '') {
+            alert('Silakan pilih Mata Pelajaran.');
+            event.preventDefault();
+            return;
+         }
+      });
+   </script>
 
 @endsection
