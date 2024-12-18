@@ -22,7 +22,7 @@ class TeacherClassesController extends Controller
         $title = "Daftar Kelas Guru";
         $userId = Auth::id();
         $classes = Classes::join('users', 'classes.teacher_id', '=', 'users.id')
-            ->select('classes.id as class_id', 'classes.name as class_name', 'users.name as teacher_name')
+            ->select('classes.id as class_id', 'classes.name as class_name', 'users.name as teacher_name', 'classes.token as token')
             ->where('classes.teacher_id', $userId)
             ->get();
 
