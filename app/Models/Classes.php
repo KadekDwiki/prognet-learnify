@@ -14,6 +14,7 @@ class Classes extends Model
         'name',
         'description',
         'subject',
+        'token',
         'teacher_id'
     ];
 

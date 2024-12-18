@@ -61,11 +61,10 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/assignments-teachers/{classId}', [TeacherAssignmentsController::class, 'index'])->name('assignments.index');
         Route::get('/assignments-create/{classId}', [TeacherAssignmentsController::class, 'create'])->name('assignments.create');
-        Route::post('/assignments/store', [TeacherAssignmentsController::class, 'store'])->name('assignments.store');
-        Route::get('/assignments/edit/{classId}', [TeacherAssignmentsController::class, 'edit'])->name('assignments.edit');
-        Route::put('/assignments/update/{classId}', [TeacherAssignmentsController::class, 'update'])->name('assignments.update');
-        Route::delete('/assignments/delete/{classId}', [TeacherAssignmentsController::class, 'destroy'])->name('assignments.destroy');
-        Route::get('/assignments-teachers/{classId}/{assignmentId}', [TeacherAssignmentsController::class, 'showDetail'])->name('assignments.showDetail');
+        Route::post('/assignments-teachers/store', [TeacherAssignmentsController::class, 'store'])->name('assignments.store');
+        Route::get('/assignments-teachers/edit/{classId}', [TeacherAssignmentsController::class, 'edit'])->name('assignments.edit');
+        Route::put('/assignments-teachers/update/{id}', [TeacherAssignmentsController::class, 'update'])->name('assignments.update');
+        Route::get('/assignments-teacher/{classId}/{assignmentId}', [TeacherAssignmentsController::class, 'showDetail'])->name('assignments.showDetail');
 
         Route::get('/members-teachers/{id}', [TeacherClassesController::class, 'showMembers'])->name('classes.members-teachers');
         Route::post('/delete-members/{student_id}', [TeacherClassesController::class, 'destroy'])->name('members-teachers.destroy');
