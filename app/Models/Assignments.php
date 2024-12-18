@@ -26,8 +26,14 @@ class Assignments extends Model
         return $this->belongsTo(Classes::class, 'class_id'); // Relasi ke model Classroom
     }
 
+<<<<<<< HEAD
     public function submissions()
     {
         return $this->hasMany(AssignmentsSubmissions::class, 'assignment_id'); // Relasi ke model Classroom
+=======
+    public function assignment()
+    {
+        return $this->belongsTo(Assignments::class, 'assignment_id', 'id');
+>>>>>>> 25cf6312396e44ba3266c5e5805f98507a2780a4
     }
 }
