@@ -53,8 +53,25 @@ class TeacherClassesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validasi input
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string|max:500',
+            'subject' => 'required|string|max:255', // Validasi kolom subject sebagai teks
+        ]);
+
+        // Simpan data ke database
+        Classes::create([
+            'name' => $validated['name'],
+            'description' => $validated['description'],
+            'subject' => $validated['subject'], // Menyimpan subject
+            'teacher_id' => Auth::id(), // ID guru yang login
+        ]);
+
+        // Redirect dengan pesan sukses
+        return redirect()->back()->with('success', 'Kelas berhasil dibuat.');
     }
+
 
     /**
      * Display the specified resource.

@@ -48,6 +48,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::middleware(['role:teacher'])->group(function () {
         Route::get('/classes-teachers', [TeacherClassesController::class, 'index'])->name('classes-teachers');
+        Route::post('/classes/store', [TeacherClassesController::class, 'store'])->name('classes.store');
 
         Route::get('/lessons-teachers/{id}', [TeacherLessonsController::class, 'index'])->name('classes.lessons-teachers');
         Route::get('/lessons-teachers/{classId}/{lessonsId}', [TeacherLessonsController::class, 'show'])->name('lessons.detail');
@@ -58,7 +59,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/assignments/store', [TeacherAssignmentsController::class, 'store'])->name('assignments.store');
         Route::get('/assignments/edit/{classId}', [TeacherAssignmentsController::class, 'edit'])->name('assignments.edit');
         Route::put('/assignments/update/{classId}', [TeacherAssignmentsController::class, 'update'])->name('assignments.update');
-        Route::get('/assignments/{classId}/{assignmentId}', [TeacherAssignmentsController::class, 'showDetail'])->name('assignments.showDetail');
+        Route::get('/assignments-teachers/{classId}/{assignmentId}', [TeacherAssignmentsController::class, 'showDetail'])->name('assignments.showDetail');
 
         Route::get('/members-teachers/{id}', [TeacherClassesController::class, 'showMembers'])->name('classes.members-teachers');
         Route::post('/delete-members/{student_id}', [TeacherClassesController::class, 'destroy'])->name('members-teachers.destroy');

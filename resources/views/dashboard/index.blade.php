@@ -63,7 +63,7 @@
             <div class="empty-classes">
                <div class="d-flex justify-content-center align-items-center flex-column">
                   <img src="{{ asset('images/rainy-face.png') }}" alt="">
-                  <p>Yahh, kamu belom ada kelas</p>
+                  <p>Yahh, kamu belum ada kelas</p>
                   <a href="" class="btn btn-primary rounded-pill px-4">Gabung Kelas</a>
                </div>
             </div>
@@ -99,8 +99,8 @@
             <div class="empty-classes">
                <div class="d-flex justify-content-center align-items-center flex-column">
                   <img src="{{ asset('images/rainy-face.png') }}" alt="">
-                  <p>Yahh, kamu belom ada kelas</p>
-                  <a href="" class="btn btn-primary rounded-pill px-4">Gabung Kelas</a>
+                  <p>Yahh, kamu belum ada kelas</p>
+                  <a href="" class="btn btn-primary rounded-pill px-4">Buat Kelas</a>
                </div>
             </div>
          @endif
