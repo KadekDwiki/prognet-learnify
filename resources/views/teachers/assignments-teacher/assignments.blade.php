@@ -33,7 +33,7 @@
                         <p class="mb-0">{{ $assignment->created_at->diffForHumans() }}</p>
                     </div>
                     <div class="action">
-                        <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#assignmentModal">
+                        <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#assignmentModal{{$assignment->id}}">
                             <x-icon class="" name="solar:eye-broken" width="28" height="28" />
                         </a>
                         <a href="{{ route('assignments.edit', $assignment->id) }}" class="btn btn-sm btn-warning">
@@ -71,9 +71,9 @@
                         </div>
                     </div>
                 </div>
-                
 
-                    <div class="modal fade" id="assignmentModal" tabindex="-1" aria-labelledby="assignmentModalLabel"
+
+                    <div class="modal fade" id="assignmentModal{{$assignment->id}}" tabindex="-1" aria-labelledby="assignmentModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
