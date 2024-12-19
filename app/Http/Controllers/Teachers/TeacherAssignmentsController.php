@@ -152,22 +152,6 @@ class TeacherAssignmentsController extends Controller
         return redirect()->back()->with('success', 'Tugas berhasil dihapus.');
     }
 
-
-    /**public function showDetail(string $classId, string $assignmentId)
-    {
-        // Cari tugas berdasarkan ID
-        $topics = Assignments::findOrFail($assignmentId);
-        $title = 'Detail Tugas';
-
-
-    /**if ($topics->class_id != $classId) {
-        abort(404, 'Kelas atau tugas tidak ditemukan');
-    }*/
-
-    // Menampilkan view detail tugas
-    /**return view('teachers.assignments-teacher.detail-assignments', compact('topics', 'title', 'classId'));
-    }*/
-
     public function showDetail(string $classId, string $assignmentId)
     {
         //dd("Class ID: " . $classId, "Assignment ID: " . $assignmentId);
