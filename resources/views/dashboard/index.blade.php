@@ -7,6 +7,14 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
+
+    @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Berhasil!</strong> {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
     <div class="header mb-3">
         <h4 class="text-primary text-capitalize">Selamat {{ $greeting }}, {{ auth()->user()->name }}!</h4>
 
@@ -143,10 +151,44 @@
                     <div class="d-flex justify-content-center align-items-center flex-column">
                         <img src="{{ asset('images/rainy-face.png') }}" alt="">
                         <p>Yahh, kamu belum ada kelas</p>
-                        <a href="" class="btn btn-primary rounded-pill px-4">Buat Kelas</a>
+                        <button type="button" class="btn btn-primary rounded-pill px-4" data-bs-toggle="modal"
+                            data-bs-target="#createClassModal">
+                            Buat Kelas
+                        </button>
                     </div>
                 </div>
             @endif
         </div>
     @endif
+
+    <!-- Modal untuk Buat Kelas -->
+    <div class="modal fade" id="createClassModal" tabindex="-1" aria-labelledby="createClassModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createClassModalLabel">Buat Kelas Baru</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="createClassForm" method="POST" action="{{ route('classes.store') }}">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="className" class="form-label">Nama Kelas</label>
+                            <input type="text" class="form-control" id="className" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="classDescription" class="form-label">Deskripsi</label>
+                            <textarea class="form-control" id="classDescription" name="description" rows="3" required></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Buat Kelas</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
