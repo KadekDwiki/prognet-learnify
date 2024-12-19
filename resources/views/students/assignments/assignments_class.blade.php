@@ -15,7 +15,7 @@
                      <p class="mb-0">{{ Str::limit($assignment->content, 40, '...') }}</p>
                      <a href="/assignments/{{ $assignment->class_id }}/{{ $assignment->id }}">Lihat Tugas</a>
                   </div>
-                  <div class="grade">
+                  <div class="grade" style="width: 122px; text-align:end;">
                      <span class="px-3 py-2 fw-semibold rounded-3 border border-primary">
                         {{ empty($assignment->grade) ? "0" : $assignment->grade }} / 100
                      </span>
