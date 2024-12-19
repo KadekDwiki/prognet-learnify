@@ -15,9 +15,10 @@ class CardClass extends Component
         public string $classId,
         public string $name,
         public string $teacher,
-        public string $task = '0',
-        public string $progress = '0'
-    ) {}
+        public string $token
+    ) {
+        // dd($token);
+    }
 
     /**
      * Get the view / contents that represent the component.

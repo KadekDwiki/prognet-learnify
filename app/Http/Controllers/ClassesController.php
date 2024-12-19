@@ -23,7 +23,7 @@ class ClassesController extends Controller
         $userId = Auth::id();
         $classes = ClassStudents::join('classes', 'class_students.class_id', '=', 'classes.id')
             ->join('users', 'classes.teacher_id', '=', 'users.id')
-            ->select('classes.id as class_id', 'classes.name as class_name', 'users.name as teacher_name')
+            ->select('classes.id as class_id', 'classes.name as class_name', 'users.name as teacher_name', 'classes.token as token')
             ->where('class_students.student_id', $userId)
             ->get();
 
