@@ -114,6 +114,7 @@ class TeacherAssignmentsController extends Controller
             ->where('class_id', $classId)
             ->get();
 
+        // dd($topic);
         return view('teachers.assignments-teacher.edit-assignments', compact('assignments','classId', 'topic', 'title'));
     }
 
