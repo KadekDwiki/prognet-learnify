@@ -15,4 +15,9 @@ class ClassStudents extends Model
         'student_id',
         'joined_at'
     ];
+
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', 1);
+    }
 }

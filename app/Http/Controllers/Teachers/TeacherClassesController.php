@@ -38,7 +38,7 @@ class TeacherClassesController extends Controller
 
         // $teachers = $class->teacher();
         $teacherName = $class->teacher->name;
-        $students = $class->students()->paginate(10);
+        $students = $class->students()->active()->paginate(10);
         // dd($students);
 
 
@@ -117,7 +117,7 @@ class TeacherClassesController extends Controller
 
         // Ambil semua siswa beserta nilai mereka untuk tugas di kelas tersebut, dengan pagination
         $students = User::whereHas('classStudents', function ($query) use ($classId) {
-                $query->where('class_id', $classId);
+                $query->where('class_id', $classId)->active();
             })
             ->with(['assignmentsSubmissions' => function ($query) use ($assignments) {
                 $query->whereIn('assignment_id', $assignments->pluck('id'));
