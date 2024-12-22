@@ -89,7 +89,7 @@
                                 <div class="modal-body">
                                     <p>Tenggat: {{ \Carbon\Carbon::parse($assignment->due_date)->format('j M Y, H.i') }}
                                     </p>
-                                    <div class="d-flex justify-content-around text-center border-top pt-3">
+                                    {{-- <div class="d-flex justify-content-around text-center border-top pt-3">
                                         <div>
                                             <h5 class="mb-0">0</h5>
                                             <small>Diserahkan</small>
@@ -102,7 +102,7 @@
                                             <h5 class="mb-0">0</h5>
                                             <small>Sudah Dinilai</small>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <!-- Footer -->
                                 <div class="modal-footer">

@@ -10,6 +10,7 @@
                         <th scope="col">No</th>
                         <th scope="col">Nama</th>
                         <th scope="col">Email</th>
+                        <th scope="col">Alamat</th>
                         <th scope="col">Telepon</th>
                         <th scope="col">Aksi</th>
                     </tr>
@@ -20,6 +21,7 @@
                             <td>{{ $index + 1 }}</td>
                             <td>{{ $student->name }}</td>
                             <td>{{ $student->email }}</td>
+                            <td>{{ $student->address }}</td>
                             <td>{{ $student->telp }}</td>
                             <td>
                                 <!-- Button trigger modal -->
