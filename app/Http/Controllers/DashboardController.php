@@ -32,6 +32,8 @@ class DashboardController extends Controller
             ->join('users', 'classes.teacher_id', '=', 'users.id')
             ->select('classes.id as class_id', 'classes.name as class_name', 'users.name as teacher_name', 'classes.token as token')
             ->where('class_students.student_id', $userId)
+            ->where('class_students.is_active', true)
+            ->limit(4)
             ->get();
 
         $allAssignments = Assignments::join('classes', 'assignments.class_id', '=', 'classes.id')

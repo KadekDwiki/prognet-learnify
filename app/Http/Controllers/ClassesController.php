@@ -25,6 +25,7 @@ class ClassesController extends Controller
             ->join('users', 'classes.teacher_id', '=', 'users.id')
             ->select('classes.id as class_id', 'classes.name as class_name', 'users.name as teacher_name', 'classes.token as token')
             ->where('class_students.student_id', $userId)
+            ->where('class_students.is_active', true)
             ->get();
 
         return view('students.classes', compact('title', 'classes'));
@@ -71,21 +72,33 @@ class ClassesController extends Controller
             ->where('student_id', $user->id)
             ->first();
 
-        // Jika sudah tergabung, tampilkan pesan error
         if ($existingStudent) {
+            // Jika sudah tergabung tetapi isActive = 0, aktifkan kembali
+            if ($existingStudent->is_active == 0) {
+                DB::table('class_students')
+                    ->where('class_id', $class->id)
+                    ->where('student_id', $user->id)
+                    ->update(['is_active' => 1, 'joined_at' => now()]);
+
+                return redirect()->route('classes')->with('success', 'Anda berhasil bergabung kembali ke kelas!');
+            }
+
+            // Jika isActive = 1, tampilkan pesan error
             return redirect()->back()->with('error', 'Anda sudah tergabung di kelas ini.');
         }
 
-        // Masukkan siswa ke dalam kelas
+        // Jika belum pernah bergabung, tambahkan data baru
         DB::table('class_students')->insert([
             'class_id' => $class->id,
             'student_id' => $user->id,
+            'is_active' => 1,
             'joined_at' => now(),
         ]);
 
         // Berikan pesan sukses
         return redirect()->route('classes')->with('success', 'Anda berhasil bergabung ke kelas!');
     }
+
 
     /**
      * Display the specified resource.
