@@ -25,7 +25,8 @@ class Classes extends Model
 
     public function students()
     {
-        return $this->belongsToMany(User::class, 'class_students', 'class_id', 'student_id');
+        return $this->belongsToMany(User::class, 'class_students', 'class_id', 'student_id')
+                    ->wherePivot('is_active', 1); // Tambahkan filter hanya siswa aktif
     }
 
     public function assignments()
